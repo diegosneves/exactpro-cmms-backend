@@ -11,7 +11,7 @@ services:
       - db-mysql-exactpro:/var/lib/mysql
 
   exactpro-app:
-    image: diegoneves/exactpro:latest
+    image: diegoneves/exactpro-cmms-backend:latest
     container_name: exactpro-api
     ports:
       - "8080:8080"
