@@ -1,0 +1,14 @@
+services:
+  database:
+    image: "mysql:8.2.0-oraclelinux8"
+    container_name: exactpro_mysql_db
+    environment:
+      - MYSQL_DATABASE=${DB_NAME}
+      - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
+    ports:
+      - "3307:3306"
+    volumes:
+      - db-mysql-exactpro:/var/lib/mysql
+
+volumes:
+  db-mysql-exactpro:
