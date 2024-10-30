@@ -1,11 +1,9 @@
-package org.diegosneves.exactprocmmsbackend.infrastructure.api;
+package org.diegosneves.exactprocmmsbackend.infrastructure.configuration.web;
 
 import lombok.extern.slf4j.Slf4j;
 import org.diegosneves.exactprocmmsbackend.domain.exceptions.DomainException;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 /**

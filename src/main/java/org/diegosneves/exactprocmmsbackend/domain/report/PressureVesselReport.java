@@ -1,7 +1,7 @@
 package org.diegosneves.exactprocmmsbackend.domain.report;
 
 import org.diegosneves.exactprocmmsbackend.domain.AggregateRoot;
-import org.diegosneves.exactprocmmsbackend.domain.report.valueobject.Client;
+import org.diegosneves.exactprocmmsbackend.domain.client.Client;
 import org.diegosneves.exactprocmmsbackend.domain.validation.ValidationHandler;
 
 import java.time.Instant;

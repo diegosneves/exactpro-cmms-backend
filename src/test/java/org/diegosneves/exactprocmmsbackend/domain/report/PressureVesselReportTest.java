@@ -1,28 +1,28 @@
 package org.diegosneves.exactprocmmsbackend.domain.report;
 
+import org.diegosneves.exactprocmmsbackend.domain.client.Client;
 import org.diegosneves.exactprocmmsbackend.domain.exceptions.DomainException;
-import org.diegosneves.exactprocmmsbackend.domain.report.valueobject.Client;
 import org.diegosneves.exactprocmmsbackend.domain.validation.handler.ThrowsValidationHandler;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class PressureVesselReportTest {
 
-    @BeforeEach
-    void setUp() {
-    }
 
     @Test
     void givenValidsParamWhenCallNewReportAndValidateThenShouldReturnAPressureVesselReport() {
 
-        Client client = new Client("Exatidão", "Sapucaia do Sul - RS", "RH/Dpto Comercial/Engenharia");
+        Client client = Client.newClient("40294568000187","Exatidão", "Sapucaia do Sul - RS", "RH/Dpto Comercial/Engenharia");
 
         PressureVesselReport newReport = PressureVesselReport.newReport(client);
-        newReport.validate(new ThrowsValidationHandler());
 
         assertNotNull(newReport);
+        assertDoesNotThrow(() -> newReport.validate(new ThrowsValidationHandler()));
         assertNotNull(newReport.getClient());
         assertEquals(client, newReport.getClient());
         assertNotNull(newReport.getCreatedAt());
