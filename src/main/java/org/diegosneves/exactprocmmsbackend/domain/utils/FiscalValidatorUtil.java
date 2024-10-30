@@ -171,6 +171,7 @@ public class FiscalValidatorUtil {
         if (cnpj == null || cnpj.isEmpty() || cnpj.isBlank()) {
             validate(CNPJ_NULL_OR_EMPTY_ERROR);
         }
+        assert cnpj != null;
         return cnpj.replaceAll(NUMBERS_ONLY_REGEX, EMPTY_STRING).trim();
     }
 
