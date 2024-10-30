@@ -1,4 +1,4 @@
-package org.diegosneves.exactprocmmsbackend.domain.utils;
+package org.diegosneves.exactprocmmsbackend.infrastructure.api.utils;
 
 import com.itextpdf.text.DocumentException;
 import org.springframework.beans.factory.annotation.Autowired;

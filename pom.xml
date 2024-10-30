@@ -39,6 +39,7 @@
             **/mappers/**,
             **/factory/**,
             **/utils/**,
+            **/validation/**,
             **/org/diegosneves/exactprocmmsbackend/ExactproCmmsBackendApplication.java
         </sonar.coverage.exclusions>
     </properties>
