@@ -20,6 +20,7 @@ class PressureVesselReportTest {
         Client client = new Client("Exatidão", "Sapucaia do Sul - RS", "RH/Dpto Comercial/Engenharia");
 
         PressureVesselReport newReport = PressureVesselReport.newReport(client);
+        newReport.validate(new ThrowsValidationHandler());
 
         assertNotNull(newReport);
         assertNotNull(newReport.getClient());
