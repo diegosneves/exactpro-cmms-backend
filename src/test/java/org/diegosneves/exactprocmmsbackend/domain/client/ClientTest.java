@@ -1,5 +1,6 @@
 package org.diegosneves.exactprocmmsbackend.domain.client;
 
+import org.diegosneves.exactprocmmsbackend.domain.client.valueobject.Address;
 import org.diegosneves.exactprocmmsbackend.domain.exceptions.DomainException;
 import org.diegosneves.exactprocmmsbackend.domain.validation.handler.ThrowsValidationHandler;
 import org.junit.jupiter.api.Test;
@@ -17,6 +18,7 @@ class ClientTest {
     private static final String INVALID_CNPJ_LENGTH = "CNPJ deve ter 14 dígitos";
     private static final String INVALID_FIRST_DIGIT = "O primeiro dígito verificador do CNPJ não é válido.";
     private static final String INVALID_SECOND_DIGIT = "O segundo dígito verificador do CNPJ não é válido.";
+    private static final String CNPJ_ALL_DIGITS_SAME_ERROR = "CNPJ não deve conter todos os dígitos iguais";
 
 
     @Test
@@ -30,6 +32,25 @@ class ClientTest {
 
         assertNotNull(actual);
         assertDoesNotThrow(() -> actual.validate(new ThrowsValidationHandler()));
+        assertEquals(cnpj, actual.getCnpj());
+        assertEquals(companyName, actual.getCompanyName());
+        assertEquals(companyBranch, actual.getCompanyBranch());
+        assertEquals(companySector, actual.getCompanySector());
+    }
+
+    @Test
+    void givenAValidParamWithAddressWhenCallNewClientAndValidateThenShouldReturnAClient() {
+        final String cnpj = "24888114000188";
+        final Address address = new Address("Rua", "333", "Bairro", "Cidade", "Estado", "93000000");
+        final String companyName = "Company Name";
+        final String companyBranch = "Esteio/RS";
+        final String companySector = "Caldeiraria / Funelaria";
+
+        final var actual = Client.newClient(cnpj, address, companyName, companyBranch, companySector);
+
+        assertNotNull(actual);
+        assertDoesNotThrow(() -> actual.validate(new ThrowsValidationHandler()));
+        assertNotNull(actual.getAddress());
         assertEquals(cnpj, actual.getCnpj());
         assertEquals(companyName, actual.getCompanyName());
         assertEquals(companyBranch, actual.getCompanyBranch());
@@ -114,6 +135,22 @@ class ClientTest {
         assertNotNull(actualException);
         assertEquals(expectErrorCount, actualException.getErrors().size());
         assertEquals(INVALID_CNPJ_LENGTH, actualException.getErrors().get(0).message());
+    }
+
+    @Test
+    void givenACnpjWithSameDigitsWhenCallNewClientAndValidateThenShouldThrowAnException() {
+        final String cnpj = "22.222.222/2222-22";
+        final String companyName = "Company Name";
+        final String companyBranch = "Esteio/RS";
+        final String companySector = "Caldeiraria / Funelaria";
+        final int expectErrorCount = 1;
+
+        final var actual = Client.newClient(cnpj, companyName, companyBranch, companySector);
+        final var actualException = assertThrows(DomainException.class, () -> actual.validate(new ThrowsValidationHandler()));
+
+        assertNotNull(actualException);
+        assertEquals(expectErrorCount, actualException.getErrors().size());
+        assertEquals(CNPJ_ALL_DIGITS_SAME_ERROR, actualException.getErrors().get(0).message());
     }
 
 
