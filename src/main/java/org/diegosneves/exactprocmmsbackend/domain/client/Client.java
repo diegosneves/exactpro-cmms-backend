@@ -23,7 +23,7 @@ public class Client extends Entity<ClientID> {
 
     public static Client newClient(final String cnpj, final Address address, final String companyName, final String companyBranch, final String companySector) {
         final var id = ClientID.unique();
-        return new Client(id, cnpj, address, companyName, companyBranch, companySector);
+        return new Client(id, cnpj.trim(), address, companyName.trim(), companyBranch.trim(), companySector.trim());
     }
 
     public static Client newClient(final String cnpj, final String companyName, final String companyBranch, final String companySector) {
