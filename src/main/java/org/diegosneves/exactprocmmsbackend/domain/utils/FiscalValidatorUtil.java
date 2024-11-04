@@ -47,13 +47,14 @@ public class FiscalValidatorUtil {
     private static final String EMPTY_STRING = "";
     private static final String REPEATED_DIGIT_PATTERN = "(\\d)\\1*";
     private static final int CNPJ_LENGTH_LIMIT = 14;
+
     private static final String CNPJ_NULL_OR_EMPTY_ERROR = "O CNPJ não deve ser nulo ou vazio";
     private static final String INVALID_CNPJ_LENGTH = "CNPJ deve ter 14 dígitos";
     private static final String INVALID_FIRST_DIGIT = "O primeiro dígito verificador do CNPJ não é válido.";
     private static final String INVALID_SECOND_DIGIT = "O segundo dígito verificador do CNPJ não é válido.";
     private static final String CNPJ_ALL_DIGITS_SAME_ERROR = "CNPJ não deve conter todos os dígitos iguais";
 
-    private static ValidationHandler validationHandler = new ThrowsValidationHandler();
+    private static final ValidationHandler THROWS_VALIDATION_HANDLER = new ThrowsValidationHandler();
 
     private FiscalValidatorUtil() {
     }
@@ -77,12 +78,19 @@ public class FiscalValidatorUtil {
     public static String validateCnpj(String cnpj) {
         String cleanCnpj = validateAndCleanCnpj(cnpj);
         validateCnpjLength(cleanCnpj);
+        validateCnpjAllDigitsSame(cleanCnpj);
         validateFirstCheckDigit(cleanCnpj);
         validateSecondCheckDigit(cleanCnpj);
-        validateCnpjAllDigitsSame(cleanCnpj);
         return cleanCnpj;
     }
 
+    /**
+     * Verifica se um número de CNPJ (Cadastro Nacional da Pessoa Jurídica) é válido.
+     *
+     * <p>Este método utiliza a função {@link #validateCnpj(String)} para realizar a validação completa do CNPJ.</p>
+     *
+     * @param cnpj O número do CNPJ como uma string que pode conter formatação ou separadores.
+     */
     public static void isCnpjValid(String cnpj) {
         validateCnpj(cnpj);
     }
@@ -202,7 +210,7 @@ public class FiscalValidatorUtil {
      * @see ValidationHandler#append(ErrorData) Método utilizado para adicionar a mensagem de erro ao validationHandler.
      */
     private static void validate(String errorMessage) {
-        validationHandler.append(new ErrorData(errorMessage));
+        THROWS_VALIDATION_HANDLER.append(new ErrorData(errorMessage));
     }
 
 }
