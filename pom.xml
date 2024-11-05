@@ -38,12 +38,14 @@
             **/exceptions/**,
             **/mappers/**,
             **/factory/**,
+            **/pagination/**,
             **/utils/**,
             **/validation/**,
             **/org/diegosneves/exactprocmmsbackend/domain/Entity.java,
             **/org/diegosneves/exactprocmmsbackend/domain/AggregateRoot.java,
             **/org/diegosneves/exactprocmmsbackend/domain/Identifier.java,
             **/org/diegosneves/exactprocmmsbackend/domain/ValueObject.java,
+            **/org/diegosneves/exactprocmmsbackend/domain/client/ClientSearchQuery.java,
             **/org/diegosneves/exactprocmmsbackend/ExactproCmmsBackendApplication.java
         </sonar.coverage.exclusions>
     </properties>
