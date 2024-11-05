@@ -1,5 +1,6 @@
 package org.diegosneves.exactprocmmsbackend.domain.client.valueobject;
 
+import org.diegosneves.exactprocmmsbackend.domain.utils.RegexPatternCompileUtil;
 import org.diegosneves.exactprocmmsbackend.domain.validation.ErrorData;
 import org.diegosneves.exactprocmmsbackend.domain.validation.ValidationHandler;
 import org.diegosneves.exactprocmmsbackend.domain.validation.Validator;
@@ -27,17 +28,16 @@ public class ClientContactValidator extends Validator {
 
     private void checkPhoneConstraints() {
         final String phone = this.contact.getPhone();
-        if (phone != null && !phone.trim().matches(PHONE_NUMBER_REGEX)) {
+        if (phone != null && !RegexPatternCompileUtil.matches(PHONE_NUMBER_REGEX, phone.trim())) {
             this.getValidationHandler().append(new ErrorData(INVALID_PHONE_NUMBER));
         }
     }
 
     private void checkEmailConstraints() {
         final String email = this.contact.getEmail();
-        if (email != null && !email.trim().matches(EMAIL_VALIDATION_REGEX)) {
+        if (email != null && !RegexPatternCompileUtil.matches(EMAIL_VALIDATION_REGEX, email.trim())) {
             this.getValidationHandler().append(new ErrorData(INVALID_EMAIL_FORMAT));
         }
-
     }
 
 
