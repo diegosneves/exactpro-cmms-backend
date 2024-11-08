@@ -29,7 +29,7 @@ class ClientTest {
         final String companyBranch = "Esteio/RS";
         final String companySector = "Caldeiraria / Funelaria";
 
-        final var actual = Client.newClient(cnpj, companyName, companyBranch, companySector);
+        final var actual = Client.newClient(cnpj, null, null, companyName, companyBranch, companySector);
 
         assertNotNull(actual);
         assertDoesNotThrow(() -> actual.validate(new ThrowsValidationHandler()));
@@ -68,7 +68,7 @@ class ClientTest {
         final String companySector = "Caldeiraria / Funelaria";
         final int expectErrorCount = 1;
 
-        final var actual = Client.newClient(cnpj, companyName, companyBranch, companySector);
+        final var actual = Client.newClient(cnpj, null, null, companyName, companyBranch, companySector);
         final var actualException = assertThrows(DomainException.class, () -> actual.validate(new ThrowsValidationHandler()));
 
         assertNotNull(actualException);
@@ -84,7 +84,7 @@ class ClientTest {
         final String companySector = "Caldeiraria / Funelaria";
         final int expectErrorCount = 1;
 
-        final var actual = Client.newClient(cnpj, companyName, companyBranch, companySector);
+        final var actual = Client.newClient(cnpj, null, null, companyName, companyBranch, companySector);
         final var actualException = assertThrows(DomainException.class, () -> actual.validate(new ThrowsValidationHandler()));
 
         assertNotNull(actualException);
@@ -100,7 +100,7 @@ class ClientTest {
         final String companySector = "Caldeiraria / Funelaria";
         final int expectErrorCount = 1;
 
-        final var actual = Client.newClient(cnpj, companyName, companyBranch, companySector);
+        final var actual = Client.newClient(cnpj, null, null, companyName, companyBranch, companySector);
         final var actualException = assertThrows(DomainException.class, () -> actual.validate(new ThrowsValidationHandler()));
 
         assertNotNull(actualException);
@@ -116,7 +116,7 @@ class ClientTest {
         final String companySector = "Caldeiraria / Funelaria";
         final int expectErrorCount = 1;
 
-        final var actual = Client.newClient(cnpj, companyName, companyBranch, companySector);
+        final var actual = Client.newClient(cnpj, null, null, companyName, companyBranch, companySector);
         final var actualException = assertThrows(DomainException.class, () -> actual.validate(new ThrowsValidationHandler()));
 
         assertNotNull(actualException);
@@ -132,7 +132,7 @@ class ClientTest {
         final String companySector = "Caldeiraria / Funelaria";
         final int expectErrorCount = 1;
 
-        final var actual = Client.newClient(cnpj, companyName, companyBranch, companySector);
+        final var actual = Client.newClient(cnpj, null, null, companyName, companyBranch, companySector);
         final var actualException = assertThrows(DomainException.class, () -> actual.validate(new ThrowsValidationHandler()));
 
         assertNotNull(actualException);
@@ -148,7 +148,7 @@ class ClientTest {
         final String companySector = "Caldeiraria / Funelaria";
         final int expectErrorCount = 1;
 
-        final var actual = Client.newClient(cnpj, companyName, companyBranch, companySector);
+        final var actual = Client.newClient(cnpj, null, null, companyName, companyBranch, companySector);
         final var actualException = assertThrows(DomainException.class, () -> actual.validate(new ThrowsValidationHandler()));
 
         assertNotNull(actualException);
@@ -165,7 +165,7 @@ class ClientTest {
         final String companySector = "Caldeiraria / Funelaria";
         final int expectErrorCount = 1;
 
-        final var actual = Client.newClient(cnpj, companyName, companyBranch, companySector);
+        final var actual = Client.newClient(cnpj, null, null, companyName, companyBranch, companySector);
         final var actualException = assertThrows(DomainException.class, () -> actual.validate(new ThrowsValidationHandler()));
 
         assertNotNull(actualException);
@@ -180,7 +180,7 @@ class ClientTest {
         final String companySector = "Caldeiraria / Funelaria";
         final int expectErrorCount = 1;
 
-        final var actual = Client.newClient(cnpj, null, companyBranch, companySector);
+        final var actual = Client.newClient(cnpj,null, null, null, companyBranch, companySector);
         final var actualException = assertThrows(DomainException.class, () -> actual.validate(new ThrowsValidationHandler()));
 
         assertNotNull(actualException);
@@ -196,7 +196,7 @@ class ClientTest {
         final String companySector = "Caldeiraria / Funelaria";
         final int expectErrorCount = 1;
 
-        final var actual = Client.newClient(cnpj, companyName, companyBranch, companySector);
+        final var actual = Client.newClient(cnpj, null, null, companyName, companyBranch, companySector);
         final var actualException = assertThrows(DomainException.class, () -> actual.validate(new ThrowsValidationHandler()));
 
         assertNotNull(actualException);
@@ -211,7 +211,7 @@ class ClientTest {
         final String companySector = "Caldeiraria / Funelaria";
         final int expectErrorCount = 1;
 
-        final var actual = Client.newClient(cnpj, companyName, null, companySector);
+        final var actual = Client.newClient(cnpj, null, null, companyName, null, companySector);
         final var actualException = assertThrows(DomainException.class, () -> actual.validate(new ThrowsValidationHandler()));
 
         assertNotNull(actualException);
@@ -226,7 +226,7 @@ class ClientTest {
         final String companyName = "Company Name";
         final int expectErrorCount = 1;
 
-        final var actual = Client.newClient(cnpj, companyName, companyName, companySector);
+        final var actual = Client.newClient(cnpj, null, null, companyName, companyName, companySector);
         final var actualException = assertThrows(DomainException.class, () -> actual.validate(new ThrowsValidationHandler()));
 
         assertNotNull(actualException);
@@ -241,7 +241,7 @@ class ClientTest {
         final String companyBranch = "Esteio/RS";
         final int expectErrorCount = 1;
 
-        final var actual = Client.newClient(cnpj, companyName, companyBranch, null);
+        final var actual = Client.newClient(cnpj, null, null, companyName, companyBranch, null);
         final var actualException = assertThrows(DomainException.class, () -> actual.validate(new ThrowsValidationHandler()));
 
         assertNotNull(actualException);

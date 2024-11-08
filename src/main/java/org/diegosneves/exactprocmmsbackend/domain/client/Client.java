@@ -3,6 +3,7 @@ package org.diegosneves.exactprocmmsbackend.domain.client;
 import org.diegosneves.exactprocmmsbackend.domain.Entity;
 import org.diegosneves.exactprocmmsbackend.domain.client.valueobject.Address;
 import org.diegosneves.exactprocmmsbackend.domain.client.valueobject.ClientContact;
+import org.diegosneves.exactprocmmsbackend.domain.utils.Cleaner;
 import org.diegosneves.exactprocmmsbackend.domain.validation.ValidationHandler;
 
 public class Client extends Entity<ClientID> {
@@ -26,12 +27,7 @@ public class Client extends Entity<ClientID> {
 
     public static Client newClient(final String cnpj, final Address address, final ClientContact contact, final String companyName, final String companyBranch, final String companySector) {
         final var id = ClientID.unique();
-        return new Client(id, cnpj.trim(), address, contact, companyName.trim(), companyBranch.trim(), companySector.trim());
-    }
-
-    public static Client newClient(final String cnpj, final String companyName, final String companyBranch, final String companySector) {
-        final var id = ClientID.unique();
-        return new Client(id, cnpj, null, null, companyName, companyBranch, companySector);
+        return new Client(id, Cleaner.string(cnpj), address, contact, Cleaner.string(companyName), Cleaner.string(companyBranch), Cleaner.string(companySector));
     }
 
     public String getCnpj() {
