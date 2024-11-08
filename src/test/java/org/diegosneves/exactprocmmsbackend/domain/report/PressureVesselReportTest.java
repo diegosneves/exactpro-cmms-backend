@@ -17,7 +17,7 @@ class PressureVesselReportTest {
     @Test
     void givenValidsParamWhenCallNewReportAndValidateThenShouldReturnAPressureVesselReport() {
 
-        Client client = Client.newClient("40294568000187","Exatidão", "Sapucaia do Sul - RS", "RH/Dpto Comercial/Engenharia");
+        Client client = Client.newClient("40294568000187", null, null, "Exatidão", "Sapucaia do Sul - RS", "RH/Dpto Comercial/Engenharia");
 
         PressureVesselReport newReport = PressureVesselReport.newReport(client);
 

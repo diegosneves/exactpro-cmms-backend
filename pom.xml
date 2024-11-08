@@ -41,6 +41,9 @@
             **/pagination/**,
             **/utils/**,
             **/validation/**,
+            **/org/diegosneves/exactprocmmsbackend/application/UseCase.java,
+            **/org/diegosneves/exactprocmmsbackend/application/UnitUseCase.java,
+            **/org/diegosneves/exactprocmmsbackend/application/NullaryUseCase.java,
             **/org/diegosneves/exactprocmmsbackend/domain/Entity.java,
             **/org/diegosneves/exactprocmmsbackend/domain/AggregateRoot.java,
             **/org/diegosneves/exactprocmmsbackend/domain/Identifier.java,
@@ -142,6 +145,11 @@
             <groupId>org.w3c</groupId>
             <artifactId>dom</artifactId>
             <version>2.3.0-jaxb-1.0.6</version>
+        </dependency>
+        <dependency>
+            <groupId>io.vavr</groupId>
+            <artifactId>vavr</artifactId>
+            <version>0.10.5</version>
         </dependency>
 
     </dependencies>
