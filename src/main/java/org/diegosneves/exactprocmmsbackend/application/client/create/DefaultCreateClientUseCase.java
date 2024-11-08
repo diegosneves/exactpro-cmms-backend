@@ -28,4 +28,5 @@ public class DefaultCreateClientUseCase extends CreateClientUseCase {
         return CreateClientOutput.from(this.clientGateway.create(aClient));
     }
 
+
 }
