@@ -86,7 +86,11 @@ public class ClientValidator extends Validator {
      * @see FiscalValidatorUtil#isCnpjValid(String)
      */
     private void checkCnpjConstraints() {
-        FiscalValidatorUtil.isCnpjValid(this.client.getCnpj());
+        try {
+            FiscalValidatorUtil.isCnpjValid(this.client.getCnpj());
+        } catch (Exception e) {
+            this.getValidationHandler().append(new ErrorData(e.getMessage()));
+        }
     }
 
     /**

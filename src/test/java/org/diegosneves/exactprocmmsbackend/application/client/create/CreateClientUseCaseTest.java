@@ -47,7 +47,7 @@ class CreateClientUseCaseTest {
 
         when(this.clientGateway.create(any(Client.class))).thenAnswer(returnsFirstArg());
 
-        final var actualOutput = this.useCase.execute(command);
+        final var actualOutput = this.useCase.execute(command).get();
 
         verify(this.clientGateway, times(1)).create(argThat(aClient -> Objects.equals(cnpj, aClient.getCnpj()) &&
                 Objects.equals(address, aClient.getAddress()) &&
@@ -73,13 +73,13 @@ class CreateClientUseCaseTest {
         final var command = CreateClientCommand.with(cnpj, address, contact, companyName, companyBranch, companySector);
 
 
-        final var actualOutput = assertThrows(DomainException.class, () -> this.useCase.execute(command));
+        final var actualOutput = this.useCase.execute(command).getLeft();
 
         verify(this.clientGateway, never()).create(any());
 
         assertNotNull(actualOutput);
         assertEquals(1, actualOutput.getErrors().size());
-        assertEquals("O segundo dígito verificador do CNPJ não é válido.", actualOutput.getErrors().get(0).message());
+        assertEquals("O segundo dígito verificador do CNPJ não é válido.", actualOutput.findFirst().message());
     }
 
     @Test
@@ -93,7 +93,7 @@ class CreateClientUseCaseTest {
 
         when(this.clientGateway.create(any(Client.class))).thenAnswer(returnsFirstArg());
 
-        final var actualOutput = this.useCase.execute(command);
+        final var actualOutput = this.useCase.execute(command).get();
 
         verify(this.clientGateway, times(1)).create(argThat(aClient -> Objects.equals(cnpj, aClient.getCnpj()) &&
                 Objects.isNull(aClient.getAddress()) &&
@@ -119,7 +119,7 @@ class CreateClientUseCaseTest {
 
         when(this.clientGateway.create(any(Client.class))).thenAnswer(returnsFirstArg());
 
-        final var actualOutput = this.useCase.execute(command);
+        final var actualOutput = this.useCase.execute(command).get();
 
         verify(this.clientGateway, times(1)).create(argThat(aClient -> Objects.equals(cnpj, aClient.getCnpj()) &&
                 Objects.isNull(aClient.getAddress()) &&
@@ -147,8 +147,7 @@ class CreateClientUseCaseTest {
 
         when(this.clientGateway.create(any())).thenThrow(new IllegalStateException(expectErrorMessage));
 
-
-        final var actualOutput = assertThrows(IllegalStateException.class, () -> this.useCase.execute(command));
+        final var notification = this.useCase.execute(command).getLeft();
 
         verify(this.clientGateway, times(1)).create(argThat(aClient -> Objects.equals(cnpj, aClient.getCnpj()) &&
                 Objects.equals(address, aClient.getAddress()) &&
@@ -158,8 +157,9 @@ class CreateClientUseCaseTest {
                 Objects.equals(companyBranch, aClient.getCompanyBranch()) &&
                 Objects.equals(companySector, aClient.getCompanySector())));
 
-        assertNotNull(actualOutput);
-        assertEquals(expectErrorMessage, actualOutput.getMessage());
+        assertNotNull(notification);
+        assertEquals(1, notification.getErrors().size());
+        assertEquals(expectErrorMessage, notification.findFirst().message());
     }
 
 }
