@@ -21,7 +21,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.AdditionalAnswers.returnsFirstArg;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.argThat;
-import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -123,7 +122,7 @@ class UpdateClientUseCaseTest {
 
         final var expectedId = ClientID.from("f89f392c-8429-4760-9f39-2c8429876052");
 
-        when(this.clientGateway.findById(eq(expectedId))).thenReturn(Optional.empty());
+        when(this.clientGateway.findById(expectedId)).thenReturn(Optional.empty());
 
         final var aCommand = UpdateClientCommand.with(
                 expectedId.getValue(),
@@ -136,7 +135,7 @@ class UpdateClientUseCaseTest {
 
         final var actualOutput = assertThrows(DomainException.class, () -> this.useCase.execute(aCommand));
 
-        verify(this.clientGateway, times(1)).findById(eq(expectedId));
+        verify(this.clientGateway, times(1)).findById(expectedId);
         verify(this.clientGateway, never()).update(any());
 
         assertNotNull(actualOutput);
