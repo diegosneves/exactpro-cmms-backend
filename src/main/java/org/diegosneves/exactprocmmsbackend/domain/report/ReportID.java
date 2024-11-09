@@ -24,4 +24,8 @@ public class ReportID extends Identifier {
         return new ReportID(value.toString().toLowerCase());
     }
 
+    @Override
+    public String getValue() {
+        return this.value;
+    }
 }
