@@ -8,12 +8,12 @@ import org.diegosneves.exactprocmmsbackend.domain.validation.ValidationHandler;
 
 public class Client extends Entity<ClientID> {
 
-    private final String cnpj;
-    private final Address address;
-    private final ClientContact contact;
-    private final String companyName;
-    private final String companyBranch;
-    private final String companySector;
+    private String cnpj;
+    private Address address;
+    private ClientContact contact;
+    private String companyName;
+    private String companyBranch;
+    private String companySector;
 
     private Client(final ClientID id, final String cnpj, final Address address, final ClientContact contact, final String companyName, final String companyBranch, final String companySector) {
         super(id);
@@ -28,6 +28,17 @@ public class Client extends Entity<ClientID> {
     public static Client newClient(final String cnpj, final Address address, final ClientContact contact, final String companyName, final String companyBranch, final String companySector) {
         final var id = ClientID.unique();
         return new Client(id, Cleaner.string(cnpj), address, contact, Cleaner.string(companyName), Cleaner.string(companyBranch), Cleaner.string(companySector));
+    }
+
+    public Client update(final String cnpj, final Address address, final ClientContact contact, final String companyName, final String companyBranch, final String companySector) {
+        this.cnpj = cnpj;
+        this.address = address;
+        this.contact = contact;
+        this.companyName = companyName;
+        this.companyBranch = companyBranch;
+        this.companySector = companySector;
+
+        return this;
     }
 
     public String getCnpj() {

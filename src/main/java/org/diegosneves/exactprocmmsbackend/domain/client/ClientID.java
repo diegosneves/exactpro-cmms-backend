@@ -2,6 +2,7 @@ package org.diegosneves.exactprocmmsbackend.domain.client;
 
 import org.diegosneves.exactprocmmsbackend.domain.Identifier;
 
+import java.util.Objects;
 import java.util.UUID;
 
 public class ClientID extends Identifier {
@@ -24,4 +25,21 @@ public class ClientID extends Identifier {
         return new ClientID(value);
     }
 
+    @Override
+    public boolean equals(Object object) {
+        if (this == object) return true;
+        if (object == null || getClass() != object.getClass()) return false;
+        ClientID clientID = (ClientID) object;
+        return Objects.equals(getValue(), clientID.getValue());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(getValue());
+    }
+
+    @Override
+    public String getValue() {
+        return this.value;
+    }
 }
