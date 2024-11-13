@@ -1,23 +1,22 @@
-package org.diegosneves.exactprocmmsbackend.application.client.retrieve.get;
+package org.diegosneves.exactprocmmsbackend.application.client.retrieve.list;
 
 import org.diegosneves.exactprocmmsbackend.domain.client.Client;
 import org.diegosneves.exactprocmmsbackend.domain.client.ClientID;
 import org.diegosneves.exactprocmmsbackend.domain.client.valueobject.Address;
 import org.diegosneves.exactprocmmsbackend.domain.client.valueobject.ClientContact;
 
-public record ClientOutput(
+public record ClientListOutput(
         ClientID id,
         String cnpj,
         Address address,
         ClientContact contact,
         String companyName,
         String companyBrach,
-        String companySector) {
+        String companySector
+) {
 
-
-    public static ClientOutput from(final Client aClient) {
-
-        return new ClientOutput(
+    public static ClientListOutput from(final Client aClient) {
+        return new ClientListOutput(
                 aClient.getId(),
                 aClient.getCnpj(),
                 aClient.getAddress(),
@@ -25,7 +24,6 @@ public record ClientOutput(
                 aClient.getCompanyName(),
                 aClient.getCompanyBranch(),
                 aClient.getCompanySector());
-
     }
 
 }
