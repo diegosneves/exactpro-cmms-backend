@@ -88,7 +88,6 @@ class ListClientsUseCaseTest {
     @Test
     void shouldThrowExceptionWhenValidQueryCausesGatewayError() {
         final var errorMessage = "Gateway error";
-        final var clients = List.<Client>of();
         final var expectedPage = 0;
         final var expectedPerPage = 10;
         final var expectedTerms = "";

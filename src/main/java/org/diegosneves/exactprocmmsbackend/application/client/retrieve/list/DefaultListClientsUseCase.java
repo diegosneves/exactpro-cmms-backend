@@ -1,6 +1,5 @@
 package org.diegosneves.exactprocmmsbackend.application.client.retrieve.list;
 
-import org.diegosneves.exactprocmmsbackend.domain.client.Client;
 import org.diegosneves.exactprocmmsbackend.domain.client.ClientGateway;
 import org.diegosneves.exactprocmmsbackend.domain.client.ClientSearchQuery;
 import org.diegosneves.exactprocmmsbackend.domain.pagination.Pagination;
