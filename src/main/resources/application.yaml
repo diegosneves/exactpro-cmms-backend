@@ -21,6 +21,12 @@ spring:
       maximum-pool-size: 20 #Ideal manter baixa mesmo. Máximo de até 20 conexões com o banco de dados.
       minimum-idle: 10
       pool-name: master
+  flyway:
+    url: jdbc:mysql://${DB_HOST}:${DB_PORT}/${DB_NAME}
+    user: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+    locations: classpath:db/migration
+    baseline-on-migrate: true
   jpa:
     open-in-view: false #Por padrão (True) ele abre uma conexão com o banco de dados desde o controller.
     show-sql: true
