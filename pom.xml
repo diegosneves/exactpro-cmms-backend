@@ -49,6 +49,7 @@
             **/org/diegosneves/exactprocmmsbackend/domain/Identifier.java,
             **/org/diegosneves/exactprocmmsbackend/domain/ValueObject.java,
             **/org/diegosneves/exactprocmmsbackend/domain/client/ClientSearchQuery.java,
+            **/org/diegosneves/exactprocmmsbackend/infrastructure/client/**,
             **/org/diegosneves/exactprocmmsbackend/ExactproCmmsBackendApplication.java
         </sonar.coverage.exclusions>
     </properties>

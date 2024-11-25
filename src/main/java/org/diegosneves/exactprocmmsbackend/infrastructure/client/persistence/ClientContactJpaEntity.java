@@ -6,7 +6,9 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.diegosneves.exactprocmmsbackend.domain.client.valueobject.ClientContact;
 
 import java.util.Objects;
@@ -14,6 +16,8 @@ import java.util.Objects;
 @Entity
 @Table(name = "client_contacts")
 @NoArgsConstructor
+@Getter
+@Setter
 public class ClientContactJpaEntity {
 
     @Id
@@ -31,30 +35,6 @@ public class ClientContactJpaEntity {
 
     public static ClientContactJpaEntity from(final ClientContact aContact) {
         return new ClientContactJpaEntity(aContact.getEmail(), aContact.getPhone());
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(final Long id) {
-        this.id = id;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(final String email) {
-        this.email = email;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(final String phone) {
-        this.phone = phone;
     }
 
     @Override

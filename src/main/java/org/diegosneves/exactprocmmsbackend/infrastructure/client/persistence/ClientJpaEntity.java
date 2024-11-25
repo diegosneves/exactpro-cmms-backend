@@ -7,13 +7,17 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.diegosneves.exactprocmmsbackend.domain.client.Client;
 import org.diegosneves.exactprocmmsbackend.domain.client.ClientID;
 
 @Entity
 @Table(name = "clients")
 @NoArgsConstructor
+@Getter
+@Setter
 public class ClientJpaEntity {
 
     @Id
@@ -74,60 +78,4 @@ public class ClientJpaEntity {
         );
     }
 
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getCnpj() {
-        return cnpj;
-    }
-
-    public void setCnpj(String cnpj) {
-        this.cnpj = cnpj;
-    }
-
-    public AddressJpaEntity getAddress() {
-        return address;
-    }
-
-    public void setAddress(AddressJpaEntity address) {
-        this.address = address;
-    }
-
-    public ClientContactJpaEntity getContact() {
-        return contact;
-    }
-
-    public void setContact(ClientContactJpaEntity contact) {
-        this.contact = contact;
-    }
-
-    public String getCompanyName() {
-        return companyName;
-    }
-
-    public void setCompanyName(String companyName) {
-        this.companyName = companyName;
-    }
-
-    public String getCompanyBranch() {
-        return companyBranch;
-    }
-
-    public void setCompanyBranch(String companyBranch) {
-        this.companyBranch = companyBranch;
-    }
-
-    public String getCompanySector() {
-        return companySector;
-    }
-
-    public void setCompanySector(String companySector) {
-        this.companySector = companySector;
-    }
 }
