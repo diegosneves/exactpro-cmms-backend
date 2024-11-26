@@ -249,6 +249,28 @@ class ClientTest {
         assertEquals("Company sector is required", actualException.getErrors().get(0).message());
     }
 
+    @Test
+    void givenAClientValidWhenCallTheWithMethodThenShouldReturnAClient() {
+        final String cnpj = "24888114000188";
+        final String companyName = "Company Name";
+        final String companyBranch = "Esteio/RS";
+        final String companySector = "Caldeiraria / Funelaria";
+
+        final var aClient = Client.newClient(cnpj, null, null, companyName, companyBranch, companySector);
+
+        final var actual = Client.with(aClient);
+
+        assertNotNull(actual);
+        assertDoesNotThrow(() -> actual.validate(new ThrowsValidationHandler()));
+        assertNotNull(actual.getId());
+        assertNotNull(actual.getId().getValue());
+        assertEquals(cnpj, actual.getCnpj());
+        assertEquals(companyName, actual.getCompanyName());
+        assertEquals(companyBranch, actual.getCompanyBranch());
+        assertEquals(companySector, actual.getCompanySector());
+
+    }
+
 
 
 }
