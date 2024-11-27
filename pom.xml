@@ -229,6 +229,7 @@
                     <url>jdbc:mysql://localhost:3307/exactpro_db</url>
                     <user>root</user>
                     <password>${env.DB_PASSWORD}</password>
+                    <cleanDisabled>false</cleanDisabled>
                     <locations>
                         <location>filesystem:src/main/resources/db/migration</location>
                     </locations>
