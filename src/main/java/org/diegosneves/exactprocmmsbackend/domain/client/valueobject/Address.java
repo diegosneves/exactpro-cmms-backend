@@ -19,7 +19,7 @@ public class Address {
     }
 
     public String getStreet() {
-        return street;
+        return this.street;
     }
 
     public void setStreet(String street) {
@@ -27,7 +27,7 @@ public class Address {
     }
 
     public String getNumber() {
-        return number;
+        return this.number;
     }
 
     public void setNumber(String number) {
@@ -35,7 +35,7 @@ public class Address {
     }
 
     public String getNeighborhood() {
-        return neighborhood;
+        return this.neighborhood;
     }
 
     public void setNeighborhood(String neighborhood) {
@@ -43,7 +43,7 @@ public class Address {
     }
 
     public String getCity() {
-        return city;
+        return this.city;
     }
 
     public void setCity(String city) {
@@ -51,7 +51,7 @@ public class Address {
     }
 
     public String getState() {
-        return state;
+        return this.state;
     }
 
     public void setState(String state) {
@@ -59,7 +59,7 @@ public class Address {
     }
 
     public String getZip() {
-        return zip;
+        return this.zip;
     }
 
     public void setZip(String zip) {

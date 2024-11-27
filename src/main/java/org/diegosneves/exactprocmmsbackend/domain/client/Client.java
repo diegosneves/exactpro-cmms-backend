@@ -30,6 +30,38 @@ public class Client extends Entity<ClientID> {
         return new Client(id, Cleaner.string(cnpj), address, contact, Cleaner.string(companyName), Cleaner.string(companyBranch), Cleaner.string(companySector));
     }
 
+    public static Client with(final Client aClient) {
+        return with(
+                aClient.getId(),
+                aClient.getCnpj(),
+                aClient.getAddress(),
+                aClient.getContact(),
+                aClient.getCompanyName(),
+                aClient.getCompanyBranch(),
+                aClient.getCompanySector()
+        );
+    }
+
+    public static Client with(
+            final ClientID anId,
+            final String cnpj,
+            final Address anAddress,
+            final ClientContact aContact,
+            final String companyName,
+            final String companyBranch,
+            final String companySector)
+    {
+        return new Client(
+                anId,
+                cnpj,
+                anAddress,
+                aContact,
+                companyName,
+                companyBranch,
+                companySector
+        );
+    }
+
     public Client update(final String cnpj, final Address address, final ClientContact contact, final String companyName, final String companyBranch, final String companySector) {
         this.cnpj = cnpj;
         this.address = address;

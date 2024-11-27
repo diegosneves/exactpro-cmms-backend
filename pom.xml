@@ -49,6 +49,7 @@
             **/org/diegosneves/exactprocmmsbackend/domain/Identifier.java,
             **/org/diegosneves/exactprocmmsbackend/domain/ValueObject.java,
             **/org/diegosneves/exactprocmmsbackend/domain/client/ClientSearchQuery.java,
+            **/org/diegosneves/exactprocmmsbackend/infrastructure/client/**,
             **/org/diegosneves/exactprocmmsbackend/ExactproCmmsBackendApplication.java
         </sonar.coverage.exclusions>
     </properties>
@@ -92,7 +93,7 @@
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
-            <!--            <scope>test</scope>-->
+            <scope>test</scope>
         </dependency>
 
         <!-- Junit 5 -->
