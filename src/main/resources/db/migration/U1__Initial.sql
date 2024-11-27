@@ -1,4 +1,4 @@
 
 DROP TABLE IF EXISTS clients;
 DROP TABLE IF EXISTS addresses;
-DROP TABLE IF EXISTS client_contacts;
+DROP TABLE IF EXISTS contacts;

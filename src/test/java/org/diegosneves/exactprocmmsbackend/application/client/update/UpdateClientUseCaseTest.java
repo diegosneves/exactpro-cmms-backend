@@ -4,7 +4,7 @@ import org.diegosneves.exactprocmmsbackend.domain.client.Client;
 import org.diegosneves.exactprocmmsbackend.domain.client.ClientGateway;
 import org.diegosneves.exactprocmmsbackend.domain.client.ClientID;
 import org.diegosneves.exactprocmmsbackend.domain.client.valueobject.Address;
-import org.diegosneves.exactprocmmsbackend.domain.client.valueobject.ClientContact;
+import org.diegosneves.exactprocmmsbackend.domain.client.valueobject.Contact;
 import org.diegosneves.exactprocmmsbackend.domain.exceptions.DomainException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -40,8 +40,8 @@ class UpdateClientUseCaseTest {
         final var expectedCnpj = "34494244000190";
         final var expectedAddress = new Address("Rua", "333", "Bairro", "Cidade", "RS", "82456789");
         final var oldAddress = new Address("Rua2", "3332", "Bairro2", "Cidade2", "RS", "824567892");
-        final var expectedContact = new ClientContact("email@email.com", "12334567896");
-        final var oldContact = new ClientContact("email2@email.com", "11111111");
+        final var expectedContact = new Contact("email@email.com", "12334567896");
+        final var oldContact = new Contact("email2@email.com", "11111111");
         final var expectedCompanyName = "Company Name";
         final var expectedCompanyBranch = "Company Branch";
         final var expectedCompanySector = "Company Sector";
@@ -81,8 +81,8 @@ class UpdateClientUseCaseTest {
         final var expectedCnpj = "34494244000191";
         final var expectedAddress = new Address("Rua", "333", "Bairro", "Cidade", "RS", "82456789");
         final var oldAddress = new Address("Rua2", "3332", "Bairro2", "Cidade2", "RS", "824567892");
-        final var expectedContact = new ClientContact("email@email.com", "12334567896");
-        final var oldContact = new ClientContact("email2@email.com", "11111111");
+        final var expectedContact = new Contact("email@email.com", "12334567896");
+        final var oldContact = new Contact("email2@email.com", "11111111");
         final var expectedCompanyName = "Company Name";
         final var expectedCompanyBranch = "Company Branch";
         final var expectedCompanySector = "Company Sector";
@@ -115,7 +115,7 @@ class UpdateClientUseCaseTest {
     void givenAnInvalidIDWhenUpdateClientUseCaseShouldThrowException() {
         final var expectedCnpj = "34494244000190";
         final var expectedAddress = new Address("Rua", "333", "Bairro", "Cidade", "RS", "82456789");
-        final var expectedContact = new ClientContact("email@email.com", "12334567896");
+        final var expectedContact = new Contact("email@email.com", "12334567896");
         final var expectedCompanyName = "Company Name";
         final var expectedCompanyBranch = "Company Branch";
         final var expectedCompanySector = "Company Sector";

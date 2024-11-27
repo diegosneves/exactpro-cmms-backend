@@ -9,7 +9,7 @@ CREATE TABLE addresses
     zip          VARCHAR(255) NOT NULL
 );
 
-CREATE TABLE client_contacts
+CREATE TABLE contacts
 (
     id    BIGINT       NOT NULL AUTO_INCREMENT PRIMARY KEY,
     email VARCHAR(255) NOT NULL,
@@ -26,6 +26,6 @@ CREATE TABLE clients
     companyBranch VARCHAR(255) NOT NULL,
     companySector VARCHAR(255) NOT NULL,
     FOREIGN KEY (address_id) REFERENCES addresses (id),
-    FOREIGN KEY (contact_id) REFERENCES client_contacts (id)
+    FOREIGN KEY (contact_id) REFERENCES contacts (id)
 
 );

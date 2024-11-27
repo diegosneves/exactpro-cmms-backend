@@ -1,4 +1,4 @@
-package org.diegosneves.exactprocmmsbackend.infrastructure.client.persistence;
+package org.diegosneves.exactprocmmsbackend.infrastructure.address.persistence;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

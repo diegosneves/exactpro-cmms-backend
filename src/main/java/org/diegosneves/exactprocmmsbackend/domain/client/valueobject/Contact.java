@@ -2,20 +2,20 @@ package org.diegosneves.exactprocmmsbackend.domain.client.valueobject;
 
 import org.diegosneves.exactprocmmsbackend.domain.validation.ValidationHandler;
 
-public class ClientContact {
+public class Contact {
 
     private String email;
     private String phone;
 
-    public ClientContact() {}
+    public Contact() {}
 
-    public ClientContact(String email, String phone) {
+    public Contact(String email, String phone) {
         this.email = email;
         this.phone = phone;
     }
 
     public void validate(ValidationHandler validator) {
-        new ClientContactValidator(this, validator).validate();
+        new ContactValidator(this, validator).validate();
     }
 
     public String getEmail() {

@@ -1,13 +1,13 @@
 package org.diegosneves.exactprocmmsbackend.application.client.update;
 
 import org.diegosneves.exactprocmmsbackend.domain.client.valueobject.Address;
-import org.diegosneves.exactprocmmsbackend.domain.client.valueobject.ClientContact;
+import org.diegosneves.exactprocmmsbackend.domain.client.valueobject.Contact;
 
 public record UpdateClientCommand(
         String id,
         String cnpj,
         Address address,
-        ClientContact contact,
+        Contact contact,
         String companyName,
         String companyBrach,
         String companySector) {
@@ -16,7 +16,7 @@ public record UpdateClientCommand(
             final String id,
             final String cnpj,
             final Address address,
-            final ClientContact contact,
+            final Contact contact,
             final String companyName,
             final String companyBrach,
             final String companySector) {
