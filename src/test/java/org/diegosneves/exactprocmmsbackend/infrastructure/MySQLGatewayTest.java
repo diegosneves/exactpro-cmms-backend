@@ -1,6 +1,7 @@
-package org.diegosneves.exactprocmmsbackend.infrastructure.client;
+package org.diegosneves.exactprocmmsbackend.infrastructure;
 
 
+import org.diegosneves.exactprocmmsbackend.infrastructure.client.CleanUpExtension;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -20,6 +21,7 @@ import java.lang.annotation.Target;
 @ActiveProfiles("test-integration")
 @DataJpaTest
 @ComponentScan(
+        basePackages = {"org.diegosneves.exactprocmmsbackend.infrastructure"},
         useDefaultFilters = false,
         includeFilters = {
                 @ComponentScan.Filter(type = FilterType.REGEX, pattern = ".*[MySQLGateway]")
@@ -27,6 +29,5 @@ import java.lang.annotation.Target;
 @ExtendWith(CleanUpExtension.class)
 @Tag("integrationTest")
 public @interface MySQLGatewayTest {
-
 
 }

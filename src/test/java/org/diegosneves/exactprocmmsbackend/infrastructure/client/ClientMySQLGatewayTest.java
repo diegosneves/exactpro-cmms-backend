@@ -3,6 +3,7 @@ package org.diegosneves.exactprocmmsbackend.infrastructure.client;
 import org.diegosneves.exactprocmmsbackend.domain.client.Client;
 import org.diegosneves.exactprocmmsbackend.domain.client.valueobject.Address;
 import org.diegosneves.exactprocmmsbackend.domain.client.valueobject.Contact;
+import org.diegosneves.exactprocmmsbackend.infrastructure.MySQLGatewayTest;
 import org.diegosneves.exactprocmmsbackend.infrastructure.client.persistence.ClientRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +31,7 @@ class ClientMySQLGatewayTest {
     void givenAValidClientWhenCallsCreateShouldReturnANewClient() {
         final var expectedCnpj = "24888114000188";
         final var expectedAddress = new Address("Rua", "333", "Bairro", "Cidade", "Estado", "93000000");
-        final var expectedContact = new Contact("email", "telefone");
+        final var expectedContact = new Contact("email@gmail.com", "5645");
         final var expectedCompanyName = "Company Name";
         final var expectedCompanyBranch = "Esteio/RS";
         final var expectedCompanySector = "Caldeiraria / Funelaria";
