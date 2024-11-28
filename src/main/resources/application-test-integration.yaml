@@ -1,12 +1,13 @@
 spring:
-  autoconfigure:
-    exclude:
+#  autoconfigure:
+#    exclude:
 #      - org.springframework.boot.autoconfigure.amqp.RabbitAutoConfiguration
   datasource:
     driver-class-name: org.h2.Driver
-    username: root
+    username: sa
     password: 123456
     url: jdbc:h2:mem:cmms;MODE=MYSQL;DATABASE_TO_LOWER=TRUE
+
   h2:
     console:
       enabled: true
@@ -15,7 +16,12 @@ spring:
   flyway:
     driver-class-name: org.h2.Driver
     url: jdbc:h2:mem:cmms;MODE=MYSQL;DATABASE_TO_LOWER=TRUE
-    user: root
+    user: sa
     password: 123456
     locations: classpath:db/migration
     baseline-on-migrate: true
+
+  sql:
+    init:
+      schema-locations: classpath:db/migration/V1__create_clients_and_related_tables.sql
+

@@ -2,6 +2,8 @@ package org.diegosneves.exactprocmmsbackend.domain.client.valueobject;
 
 import org.diegosneves.exactprocmmsbackend.domain.validation.ValidationHandler;
 
+import java.util.Objects;
+
 public class Contact {
 
     private String email;
@@ -33,4 +35,17 @@ public class Contact {
     public void setPhone(String phone) {
         this.phone = phone;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Contact contact = (Contact) o;
+        return Objects.equals(getEmail(), contact.getEmail()) && Objects.equals(getPhone(), contact.getPhone());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getEmail(), getPhone());
+    }
+
 }
