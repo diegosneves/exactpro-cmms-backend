@@ -1,9 +1,5 @@
 package org.diegosneves.exactprocmmsbackend.infrastructure.client;
 
-import jakarta.persistence.criteria.CriteriaBuilder;
-import jakarta.persistence.criteria.CriteriaQuery;
-import jakarta.persistence.criteria.Predicate;
-import jakarta.persistence.criteria.Root;
 import org.diegosneves.exactprocmmsbackend.domain.client.Client;
 import org.diegosneves.exactprocmmsbackend.domain.client.ClientGateway;
 import org.diegosneves.exactprocmmsbackend.domain.client.ClientID;
@@ -17,7 +13,6 @@ import org.diegosneves.exactprocmmsbackend.infrastructure.client.persistence.Cli
 import org.diegosneves.exactprocmmsbackend.infrastructure.client.persistence.ClientRepository;
 import org.diegosneves.exactprocmmsbackend.infrastructure.contact.ContactMySQLGateway;
 import org.diegosneves.exactprocmmsbackend.infrastructure.utils.SpecificationUtils;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
