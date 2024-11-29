@@ -1,5 +1,9 @@
 package org.diegosneves.exactprocmmsbackend.infrastructure.client;
 
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Predicate;
+import jakarta.persistence.criteria.Root;
 import org.diegosneves.exactprocmmsbackend.domain.client.Client;
 import org.diegosneves.exactprocmmsbackend.domain.client.ClientGateway;
 import org.diegosneves.exactprocmmsbackend.domain.client.ClientID;
@@ -12,10 +16,17 @@ import org.diegosneves.exactprocmmsbackend.infrastructure.address.AddressMySQLGa
 import org.diegosneves.exactprocmmsbackend.infrastructure.client.persistence.ClientJpaEntity;
 import org.diegosneves.exactprocmmsbackend.infrastructure.client.persistence.ClientRepository;
 import org.diegosneves.exactprocmmsbackend.infrastructure.contact.ContactMySQLGateway;
+import org.diegosneves.exactprocmmsbackend.infrastructure.utils.SpecificationUtils;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.util.Objects;
 import java.util.Optional;
+
+import static org.diegosneves.exactprocmmsbackend.infrastructure.utils.SpecificationUtils.like;
 
 @Service
 public class ClientMySQLGateway implements ClientGateway {
@@ -31,21 +42,21 @@ public class ClientMySQLGateway implements ClientGateway {
     }
 
     @Override
-    public Client create(Client aClient) {
+    public Client create(final Client aClient) {
         aClient.validate(new ThrowsValidationHandler());
-        final var newClientEntity = this.clientRepository.saveAndFlush(ClientJpaEntity.from(aClient));
+        final var newClientEntity = this.clientRepository.save(ClientJpaEntity.from(aClient));
         return newClientEntity.toAggregate();
     }
 
     @Override
-    public void deleteById(ClientID anID) {
-        if (anID != null) {
+    public void deleteById(final ClientID anID) {
+        if (anID != null && this.clientRepository.existsById(anID.getValue())) {
             this.clientRepository.deleteById(anID.getValue());
         }
     }
 
     @Override
-    public Optional<Client> findById(ClientID anID) {
+    public Optional<Client> findById(final ClientID anID) {
         Optional<Client> foundClient = Optional.empty();
         if (anID != null) {
             foundClient = this.clientRepository.findById(anID.getValue()).map(ClientJpaEntity::toAggregate);
@@ -54,7 +65,7 @@ public class ClientMySQLGateway implements ClientGateway {
     }
 
     @Override
-    public Client update(Client aClient) {
+    public Client update(final Client aClient) {
         Client updatedClient = null;
         if (aClient != null) {
             Optional<Client> existingClient = this.findById(aClient.getId());
@@ -69,36 +80,32 @@ public class ClientMySQLGateway implements ClientGateway {
         return updatedClient;
     }
 
-    private void cleanDataBase(Client aClient, Client currentClient) {
+    private void cleanDataBase(final Client aClient, final Client currentClient) {
         var addr = currentClient.getAddress();
         var contact = currentClient.getContact();
-        boolean deletedAddress = false;
-        boolean deletedContact = false;
+        boolean deletedAddress = Objects.equals(aClient.getAddress(), currentClient.getAddress());
+        boolean deletedContact = Objects.equals(aClient.getContact(), currentClient.getContact());
 
-        if (Objects.equals(aClient.getAddress(), currentClient.getAddress())) {
+        if (deletedAddress) {
             currentClient.setAddress(null);
-            deletedAddress = true;
         }
-        if (Objects.equals(aClient.getContact(), currentClient.getContact())) {
+        if (deletedContact) {
             currentClient.setContact(null);
-            deletedContact = true;
         }
 
-        if (deletedAddress && deletedContact) {
+        if (deletedAddress || deletedContact) {
             this.clientRepository.save(ClientJpaEntity.from(currentClient));
-            this.addressMySQLGateway.deleteAddress(addr);
-            this.contactMySQLGateway.deleteContact(contact);
-        } else if (deletedAddress) {
-            this.clientRepository.save(ClientJpaEntity.from(currentClient));
-            this.addressMySQLGateway.deleteAddress(addr);
-        } else if (deletedContact) {
-            this.clientRepository.save(ClientJpaEntity.from(currentClient));
-            this.contactMySQLGateway.deleteContact(contact);
+            if (deletedAddress) {
+                this.addressMySQLGateway.deleteAddress(addr);
+            }
+            if (deletedContact) {
+                this.contactMySQLGateway.deleteContact(contact);
+            }
         }
     }
 
 
-    private void updateValueObject(Address oldAddress, Address updateAddress) {
+    private void updateValueObject(final Address oldAddress, final Address updateAddress) {
         if (oldAddress != null && updateAddress == null) {
             this.addressMySQLGateway.deleteAddress(oldAddress);
         }
@@ -107,7 +114,7 @@ public class ClientMySQLGateway implements ClientGateway {
         }
     }
 
-    private void updateValueObject(Contact oldContact, Contact updateContact) {
+    private void updateValueObject(final Contact oldContact, final Contact updateContact) {
         if (oldContact != null && updateContact == null) {
             this.contactMySQLGateway.deleteContact(oldContact);
         }
@@ -118,8 +125,28 @@ public class ClientMySQLGateway implements ClientGateway {
 
 
     @Override
-    public Pagination<Client> findAll(ClientSearchQuery aQuery) {
-        return null;
+    public Pagination<Client> findAll(final ClientSearchQuery aQuery) {
+        final var page = PageRequest.of(
+                aQuery.page(),
+                aQuery.perPage(),
+                Sort.by(Sort.Direction.fromString(aQuery.direction()), aQuery.sort())
+        );
+
+        final var spec = Optional.ofNullable(aQuery.terms())
+                .filter(str -> !str.isBlank())
+                .map(str ->
+                        SpecificationUtils.<ClientJpaEntity>like("cnpj", str).or(like("companyName", str))
+                )
+                .orElse(null);
+
+        final var pageResult = this.clientRepository.findAll(Specification.where(spec), page);
+
+        return new Pagination<>(
+                pageResult.getNumber(),
+                pageResult.getSize(),
+                pageResult.getTotalElements(),
+                pageResult.map(ClientJpaEntity::toAggregate).toList()
+        );
     }
 
 }

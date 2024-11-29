@@ -2,6 +2,7 @@ package org.diegosneves.exactprocmmsbackend.infrastructure.client;
 
 import org.diegosneves.exactprocmmsbackend.domain.client.Client;
 import org.diegosneves.exactprocmmsbackend.domain.client.ClientID;
+import org.diegosneves.exactprocmmsbackend.domain.client.ClientSearchQuery;
 import org.diegosneves.exactprocmmsbackend.domain.client.valueobject.Address;
 import org.diegosneves.exactprocmmsbackend.domain.client.valueobject.Contact;
 import org.diegosneves.exactprocmmsbackend.infrastructure.MySQLGatewayTest;
@@ -11,6 +12,8 @@ import org.diegosneves.exactprocmmsbackend.infrastructure.client.persistence.Cli
 import org.diegosneves.exactprocmmsbackend.infrastructure.contact.ContactMySQLGateway;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -599,6 +602,189 @@ class ClientMySQLGatewayTest {
         assertEquals(expectedCompanyName, actualResult.getCompanyName());
         assertEquals(expectedCompanyBranch, actualResult.getCompanyBranch());
         assertEquals(expectedCompanySector, actualResult.getCompanySector());
+    }
+
+    @Test
+    void givenPrePersistedClientWhenCallsFindAllShouldReturnAllClientsPaginated() {
+        final var expectedPage = 0;
+        final var expectedPerPage = 1;
+        final var expectedTotal = 3;
+
+        final var expectedCompanyName = "Company Name";
+        final var expectedCompanyBranch = "Esteio/RS";
+        final var expectedCompanySector = "Caldeiraria / Funelaria";
+
+        final var aClientOne = Client.newClient("24888114000188", null, null, expectedCompanyName, expectedCompanyBranch, expectedCompanySector);
+        final var aClientTwo = Client.newClient("74584232000170", null, null, expectedCompanyName, expectedCompanyBranch, expectedCompanySector);
+        final var aClientThree = Client.newClient("44837185000169", null, null, expectedCompanyName, expectedCompanyBranch, expectedCompanySector);
+
+        assertEquals(0, this.repository.count());
+        this.repository.saveAll(List.of(
+                ClientJpaEntity.from(aClientOne),
+                ClientJpaEntity.from(aClientTwo),
+                ClientJpaEntity.from(aClientThree)
+        ));
+        assertEquals(3, this.repository.count());
+
+        final var query = new ClientSearchQuery(expectedPage, expectedPerPage, "", "cnpj", "asc");
+
+        final var actualResult = this.gateway.findAll(query);
+
+        assertNotNull(actualResult);
+        assertEquals(expectedPage, actualResult.currentPage());
+        assertEquals(expectedPerPage, actualResult.perPage());
+        assertEquals(expectedTotal, actualResult.total());
+        assertEquals(expectedPerPage, actualResult.items().size());
+        assertEquals(aClientOne.getId(), actualResult.items().get(0).getId());
+    }
+
+    @Test
+    void givenEmptyClientTableWhenCallsFindAllShouldReturnEmptyPage() {
+        final var expectedPage = 0;
+        final var expectedPerPage = 1;
+        final var expectedTotal = 0;
+
+        assertEquals(0, this.repository.count());
+
+        final var query = new ClientSearchQuery(expectedPage, expectedPerPage, "", "cnpj", "asc");
+
+        final var actualResult = this.gateway.findAll(query);
+
+        assertNotNull(actualResult);
+        assertEquals(expectedPage, actualResult.currentPage());
+        assertEquals(expectedPerPage, actualResult.perPage());
+        assertEquals(expectedTotal, actualResult.total());
+        assertEquals(0, actualResult.items().size());
+
+    }
+
+    @Test
+    void givenFollowPaginationWhenCallsFindAllWithPage1ShouldReturnPaginated() {
+        var expectedPage = 0;
+        final var expectedPerPage = 1;
+        final var expectedTotal = 3;
+
+        final var expectedCompanyName = "Company Name";
+        final var expectedCompanyBranch = "Esteio/RS";
+        final var expectedCompanySector = "Caldeiraria / Funelaria";
+
+        final var aClientOne = Client.newClient("24888114000188", null, null, expectedCompanyName, expectedCompanyBranch, expectedCompanySector);
+        final var aClientTwo = Client.newClient("74584232000170", null, null, expectedCompanyName, expectedCompanyBranch, expectedCompanySector);
+        final var aClientThree = Client.newClient("44837185000169", null, null, expectedCompanyName, expectedCompanyBranch, expectedCompanySector);
+
+        assertEquals(0, this.repository.count());
+        this.repository.saveAll(List.of(
+                ClientJpaEntity.from(aClientOne),
+                ClientJpaEntity.from(aClientTwo),
+                ClientJpaEntity.from(aClientThree)
+        ));
+        assertEquals(3, this.repository.count());
+
+        // Page 0
+        var query = new ClientSearchQuery(expectedPage, expectedPerPage, "", "cnpj", "asc");
+
+        var actualResult = this.gateway.findAll(query);
+
+        assertNotNull(actualResult);
+        assertEquals(expectedPage, actualResult.currentPage());
+        assertEquals(expectedPerPage, actualResult.perPage());
+        assertEquals(expectedTotal, actualResult.total());
+        assertEquals(expectedPerPage, actualResult.items().size());
+        assertEquals(aClientOne.getId(), actualResult.items().get(0).getId());
+
+        // Page 1
+        expectedPage = 1;
+        query = new ClientSearchQuery(expectedPage, expectedPerPage, "", "cnpj", "asc");
+
+        actualResult = this.gateway.findAll(query);
+
+        assertNotNull(actualResult);
+        assertEquals(expectedPage, actualResult.currentPage());
+        assertEquals(expectedPerPage, actualResult.perPage());
+        assertEquals(expectedTotal, actualResult.total());
+        assertEquals(expectedPerPage, actualResult.items().size());
+        assertEquals(aClientThree.getId(), actualResult.items().get(0).getId());
+
+        // Page 2
+        expectedPage = 2;
+        query = new ClientSearchQuery(expectedPage, expectedPerPage, "", "cnpj", "asc");
+
+        actualResult = this.gateway.findAll(query);
+
+        assertNotNull(actualResult);
+        assertEquals(expectedPage, actualResult.currentPage());
+        assertEquals(expectedPerPage, actualResult.perPage());
+        assertEquals(expectedTotal, actualResult.total());
+        assertEquals(expectedPerPage, actualResult.items().size());
+        assertEquals(aClientTwo.getId(), actualResult.items().get(0).getId());
+    }
+
+    @Test
+    void givenPrePersistedClientAnd2000TermsWhenCallsFindAllShouldReturnAllClientsPaginated() {
+        final var expectedPage = 0;
+        final var expectedPerPage = 1;
+        final var expectedTotal = 1;
+
+        final var expectedCompanyName = "Company Name";
+        final var expectedCompanyBranch = "Esteio/RS";
+        final var expectedCompanySector = "Caldeiraria / Funelaria";
+
+        final var aClientOne = Client.newClient("24888114000188", null, null, expectedCompanyName, expectedCompanyBranch, expectedCompanySector);
+        final var aClientTwo = Client.newClient("74584232000170", null, null, expectedCompanyName, expectedCompanyBranch, expectedCompanySector);
+        final var aClientThree = Client.newClient("44837185000169", null, null, "Actions Labs", "Canoas/RS", expectedCompanySector);
+
+        assertEquals(0, this.repository.count());
+        this.repository.saveAll(List.of(
+                ClientJpaEntity.from(aClientOne),
+                ClientJpaEntity.from(aClientTwo),
+                ClientJpaEntity.from(aClientThree)
+        ));
+        assertEquals(3, this.repository.count());
+
+        final var query = new ClientSearchQuery(expectedPage, expectedPerPage, "2000", "cnpj", "asc");
+
+        final var actualResult = this.gateway.findAll(query);
+
+        assertNotNull(actualResult);
+        assertEquals(expectedPage, actualResult.currentPage());
+        assertEquals(expectedPerPage, actualResult.perPage());
+        assertEquals(expectedTotal, actualResult.total());
+        assertEquals(expectedPerPage, actualResult.items().size());
+        assertEquals(aClientTwo.getId(), actualResult.items().get(0).getId());
+    }
+
+    @Test
+    void givenPrePersistedClientAnd2000TermsWhenCallsFindAllAndTermsMatchsShouldReturnAllClientsPaginated() {
+        final var expectedPage = 0;
+        final var expectedPerPage = 1;
+        final var expectedTotal = 1;
+
+        final var expectedCompanyName = "Company Name";
+        final var expectedCompanyBranch = "Esteio/RS";
+        final var expectedCompanySector = "Caldeiraria / Funelaria";
+
+        final var aClientOne = Client.newClient("24888114000188", null, null, expectedCompanyName, expectedCompanyBranch, expectedCompanySector);
+        final var aClientTwo = Client.newClient("74584232000170", null, null, expectedCompanyName, expectedCompanyBranch, expectedCompanySector);
+        final var aClientThree = Client.newClient("44837185000169", null, null, "Actions Labs", "Canoas/RS", expectedCompanySector);
+
+        assertEquals(0, this.repository.count());
+        this.repository.saveAll(List.of(
+                ClientJpaEntity.from(aClientOne),
+                ClientJpaEntity.from(aClientTwo),
+                ClientJpaEntity.from(aClientThree)
+        ));
+        assertEquals(3, this.repository.count());
+
+        final var query = new ClientSearchQuery(expectedPage, expectedPerPage, "actions", "companyName", "asc");
+
+        final var actualResult = this.gateway.findAll(query);
+
+        assertNotNull(actualResult);
+        assertEquals(expectedPage, actualResult.currentPage());
+        assertEquals(expectedPerPage, actualResult.perPage());
+        assertEquals(expectedTotal, actualResult.total());
+        assertEquals(expectedPerPage, actualResult.items().size());
+        assertEquals(aClientThree.getId(), actualResult.items().get(0).getId());
     }
 
 }
