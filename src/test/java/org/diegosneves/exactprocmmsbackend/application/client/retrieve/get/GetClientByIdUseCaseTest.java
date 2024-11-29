@@ -4,7 +4,7 @@ import org.diegosneves.exactprocmmsbackend.domain.client.Client;
 import org.diegosneves.exactprocmmsbackend.domain.client.ClientGateway;
 import org.diegosneves.exactprocmmsbackend.domain.client.ClientID;
 import org.diegosneves.exactprocmmsbackend.domain.client.valueobject.Address;
-import org.diegosneves.exactprocmmsbackend.domain.client.valueobject.ClientContact;
+import org.diegosneves.exactprocmmsbackend.domain.client.valueobject.Contact;
 import org.diegosneves.exactprocmmsbackend.domain.exceptions.DomainException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -37,7 +37,7 @@ class GetClientByIdUseCaseTest {
     void shouldBeRetrievedFromGatewayAValidClientWhenReceiveAValidClientId() {
         final var cnpj = "34494244000190";
         final var address = new Address("Rua", "333", "Bairro", "Cidade", "RS", "82456789");
-        final var contact = new ClientContact("email@email.com", "12334567896");
+        final var contact = new Contact("email@email.com", "12334567896");
         final var companyName = "Company Name";
         final var companyBranch = "Company Branch";
         final var companySector = "Company Sector";

@@ -5,7 +5,7 @@ import org.diegosneves.exactprocmmsbackend.domain.validation.ErrorData;
 import org.diegosneves.exactprocmmsbackend.domain.validation.ValidationHandler;
 import org.diegosneves.exactprocmmsbackend.domain.validation.Validator;
 
-public class ClientContactValidator extends Validator {
+public class ContactValidator extends Validator {
 
     private static final String EMAIL_VALIDATION_REGEX = "[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
     private static final String PHONE_NUMBER_REGEX = ".*\\d.*";
@@ -13,11 +13,11 @@ public class ClientContactValidator extends Validator {
     public static final String INVALID_PHONE_NUMBER = "Os dados do telefone precisam conter números";
     public static final String INVALID_EMAIL_FORMAT = "Formato de e-mail inválido!";
 
-    private final ClientContact contact;
+    private final Contact contact;
 
-    protected ClientContactValidator(ClientContact clientContact, ValidationHandler validationHandler) {
+    protected ContactValidator(Contact contact, ValidationHandler validationHandler) {
         super(validationHandler);
-        this.contact = clientContact;
+        this.contact = contact;
     }
 
     @Override

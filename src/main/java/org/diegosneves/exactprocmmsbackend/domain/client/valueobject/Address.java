@@ -1,5 +1,7 @@
 package org.diegosneves.exactprocmmsbackend.domain.client.valueobject;
 
+import java.util.Objects;
+
 public class Address {
 
     private String street;
@@ -64,5 +66,17 @@ public class Address {
 
     public void setZip(String zip) {
         this.zip = zip;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Address address = (Address) o;
+        return Objects.equals(getNumber(), address.getNumber()) && Objects.equals(getZip(), address.getZip());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getNumber(), getZip());
     }
 }

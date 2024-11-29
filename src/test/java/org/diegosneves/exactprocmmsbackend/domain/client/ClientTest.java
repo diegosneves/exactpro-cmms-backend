@@ -1,7 +1,7 @@
 package org.diegosneves.exactprocmmsbackend.domain.client;
 
 import org.diegosneves.exactprocmmsbackend.domain.client.valueobject.Address;
-import org.diegosneves.exactprocmmsbackend.domain.client.valueobject.ClientContact;
+import org.diegosneves.exactprocmmsbackend.domain.client.valueobject.Contact;
 import org.diegosneves.exactprocmmsbackend.domain.exceptions.DomainException;
 import org.diegosneves.exactprocmmsbackend.domain.validation.handler.ThrowsValidationHandler;
 import org.junit.jupiter.api.Test;
@@ -43,7 +43,7 @@ class ClientTest {
     void givenAValidParamWithAddressWhenCallNewClientAndValidateThenShouldReturnAClient() {
         final String cnpj = "24888114000188";
         final Address address = new Address("Rua", "333", "Bairro", "Cidade", "Estado", "93000000");
-        final ClientContact contact = new ClientContact("email", "telefone");
+        final Contact contact = new Contact("email", "telefone");
         final String companyName = "Company Name";
         final String companyBranch = "Esteio/RS";
         final String companySector = "Caldeiraria / Funelaria";

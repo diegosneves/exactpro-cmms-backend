@@ -1,4 +1,4 @@
-package org.diegosneves.exactprocmmsbackend.infrastructure.client.persistence;
+package org.diegosneves.exactprocmmsbackend.infrastructure.contact.persistence;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -9,16 +9,16 @@ import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.diegosneves.exactprocmmsbackend.domain.client.valueobject.ClientContact;
+import org.diegosneves.exactprocmmsbackend.domain.client.valueobject.Contact;
 
 import java.util.Objects;
 
 @Entity
-@Table(name = "client_contacts")
+@Table(name = "contacts")
 @NoArgsConstructor
 @Getter
 @Setter
-public class ClientContactJpaEntity {
+public class ContactJpaEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,19 +28,19 @@ public class ClientContactJpaEntity {
     @Column(name = "phone", nullable = false)
     private String phone;
 
-    private ClientContactJpaEntity(final String email, final String phone) {
+    private ContactJpaEntity(final String email, final String phone) {
         this.email = email;
         this.phone = phone;
     }
 
-    public static ClientContactJpaEntity from(final ClientContact aContact) {
-        return new ClientContactJpaEntity(aContact.getEmail(), aContact.getPhone());
+    public static ContactJpaEntity from(final Contact aContact) {
+        return aContact == null ? null : new ContactJpaEntity(aContact.getEmail(), aContact.getPhone());
     }
 
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
-        ClientContactJpaEntity that = (ClientContactJpaEntity) o;
+        ContactJpaEntity that = (ContactJpaEntity) o;
         return Objects.equals(getEmail(), that.getEmail()) && Objects.equals(getPhone(), that.getPhone());
     }
 
@@ -49,7 +49,7 @@ public class ClientContactJpaEntity {
         return Objects.hash(getEmail(), getPhone());
     }
 
-    public ClientContact toAggregate() {
-        return new ClientContact(this.getEmail(), this.getPhone());
+    public Contact toAggregate() {
+        return new Contact(this.getEmail(), this.getPhone());
     }
 }

@@ -12,6 +12,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.diegosneves.exactprocmmsbackend.domain.client.Client;
 import org.diegosneves.exactprocmmsbackend.domain.client.ClientID;
+import org.diegosneves.exactprocmmsbackend.infrastructure.address.persistence.AddressJpaEntity;
+import org.diegosneves.exactprocmmsbackend.infrastructure.contact.persistence.ContactJpaEntity;
 
 @Entity
 @Table(name = "clients")
@@ -29,7 +31,7 @@ public class ClientJpaEntity {
     private AddressJpaEntity address;
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "contact_id", referencedColumnName = "id")
-    private ClientContactJpaEntity contact;
+    private ContactJpaEntity contact;
     @Column(name = "companyName", nullable = false)
     private String companyName;
     @Column(name = "companyBranch", nullable = false)
@@ -41,7 +43,7 @@ public class ClientJpaEntity {
             final String id,
             final String cnpj,
             final AddressJpaEntity address,
-            final ClientContactJpaEntity contact,
+            final ContactJpaEntity contact,
             final String companyName,
             final String companyBranch,
             final String companySector) {
@@ -59,7 +61,7 @@ public class ClientJpaEntity {
                 aClient.getId().getValue(),
                 aClient.getCnpj(),
                 AddressJpaEntity.from(aClient.getAddress()),
-                ClientContactJpaEntity.from(aClient.getContact()),
+                ContactJpaEntity.from(aClient.getContact()),
                 aClient.getCompanyName(),
                 aClient.getCompanyBranch(),
                 aClient.getCompanySector()
@@ -70,8 +72,8 @@ public class ClientJpaEntity {
         return Client.with(
                 ClientID.from(this.getId()),
                 this.getCnpj(),
-                this.getAddress().toAggregate(),
-                this.getContact().toAggregate(),
+                this.getAddress() != null ? this.getAddress().toAggregate() : null,
+                this.getContact() != null ? this.getContact().toAggregate() : null,
                 this.getCompanyName(),
                 this.getCompanyBranch(),
                 this.getCompanySector()

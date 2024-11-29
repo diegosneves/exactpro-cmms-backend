@@ -4,7 +4,7 @@ import org.diegosneves.exactprocmmsbackend.domain.client.Client;
 import org.diegosneves.exactprocmmsbackend.domain.client.ClientGateway;
 import org.diegosneves.exactprocmmsbackend.domain.client.ClientID;
 import org.diegosneves.exactprocmmsbackend.domain.client.valueobject.Address;
-import org.diegosneves.exactprocmmsbackend.domain.client.valueobject.ClientContact;
+import org.diegosneves.exactprocmmsbackend.domain.client.valueobject.Contact;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -39,7 +39,7 @@ class DeleteClientUseCaseTest {
     @Test
     void shouldDeleteClientWhenReceiveAValidID() {
         final var expectedAddress = new Address("Rua", "333", "Bairro", "Cidade", "RS", "82456789");
-        final var expectedContact = new ClientContact("email@email.com", "12334567896");
+        final var expectedContact = new Contact("email@email.com", "12334567896");
         final var aClient = Client.newClient("90.265.697/0001-15", expectedAddress, expectedContact, "expectedCompanyName", "expectedCompanyBranch", "expectedCompanySector");
         final var expectedId = aClient.getId();
 
@@ -65,7 +65,7 @@ class DeleteClientUseCaseTest {
     @Test
     void shouldReturnAnExceptionWhenClientGatewayThrowsAnException() {
         final var expectedAddress = new Address("Rua", "333", "Bairro", "Cidade", "RS", "82456789");
-        final var expectedContact = new ClientContact("email@email.com", "12334567896");
+        final var expectedContact = new Contact("email@email.com", "12334567896");
         final var aClient = Client.newClient("90.265.697/0001-15", expectedAddress, expectedContact, "expectedCompanyName", "expectedCompanyBranch", "expectedCompanySector");
         final var expectedId = aClient.getId();
 

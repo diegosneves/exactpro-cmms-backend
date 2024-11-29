@@ -3,7 +3,7 @@ package org.diegosneves.exactprocmmsbackend.application.client.create;
 import org.diegosneves.exactprocmmsbackend.domain.client.Client;
 import org.diegosneves.exactprocmmsbackend.domain.client.ClientGateway;
 import org.diegosneves.exactprocmmsbackend.domain.client.valueobject.Address;
-import org.diegosneves.exactprocmmsbackend.domain.client.valueobject.ClientContact;
+import org.diegosneves.exactprocmmsbackend.domain.client.valueobject.Contact;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -36,7 +36,7 @@ class CreateClientUseCaseTest {
     void shouldCreateClientGivenValidInput() {
         final var cnpj = "34494244000190";
         final var address = new Address("Rua", "333", "Bairro", "Cidade", "RS", "82456789");
-        final var contact = new ClientContact("email@email.com", "12334567896");
+        final var contact = new Contact("email@email.com", "12334567896");
         final var companyName = "Company Name";
         final var companyBranch = "Company Branch";
         final var companySector = "Company Sector";
@@ -63,7 +63,7 @@ class CreateClientUseCaseTest {
     void givenAnInvalidParamWhenCreatingClientUseCaseShouldThrowException() {
         final var cnpj = "34494244000191";
         final var address = new Address("Rua", "333", "Bairro", "Cidade", "RS", "82456789");
-        final var contact = new ClientContact("email@email.com", "12334567896");
+        final var contact = new Contact("email@email.com", "12334567896");
         final var companyName = "Company Name";
         final var companyBranch = "Company Branch";
         final var companySector = "Company Sector";
@@ -108,7 +108,7 @@ class CreateClientUseCaseTest {
     @Test
     void shouldCreateClientWithValidInputButWithoutAddressAnd() {
         final var cnpj = "34494244000190";
-        final var contact = new ClientContact("email@email.com", "12334567896");
+        final var contact = new Contact("email@email.com", "12334567896");
         final var companyName = "Company Name";
         final var companyBranch = "Company Branch";
         final var companySector = "Company Sector";
@@ -135,7 +135,7 @@ class CreateClientUseCaseTest {
     void givenValidCreateClientCommand_whenGatewayThrowsException_thenExceptionIsPropagated() {
         final var cnpj = "34494244000190";
         final var address = new Address("Rua", "333", "Bairro", "Cidade", "RS", "82456789");
-        final var contact = new ClientContact("email@email.com", "12334567896");
+        final var contact = new Contact("email@email.com", "12334567896");
         final var companyName = "Company Name";
         final var companyBranch = "Company Branch";
         final var companySector = "Company Sector";
