@@ -72,8 +72,8 @@ public class ClientJpaEntity {
         return Client.with(
                 ClientID.from(this.getId()),
                 this.getCnpj(),
-                this.getAddress().toAggregate(),
-                this.getContact().toAggregate(),
+                this.getAddress() != null ? this.getAddress().toAggregate() : null,
+                this.getContact() != null ? this.getContact().toAggregate() : null,
                 this.getCompanyName(),
                 this.getCompanyBranch(),
                 this.getCompanySector()

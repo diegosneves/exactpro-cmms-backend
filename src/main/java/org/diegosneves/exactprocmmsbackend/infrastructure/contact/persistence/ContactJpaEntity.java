@@ -34,7 +34,7 @@ public class ContactJpaEntity {
     }
 
     public static ContactJpaEntity from(final Contact aContact) {
-        return new ContactJpaEntity(aContact.getEmail(), aContact.getPhone());
+        return aContact == null ? null : new ContactJpaEntity(aContact.getEmail(), aContact.getPhone());
     }
 
     @Override

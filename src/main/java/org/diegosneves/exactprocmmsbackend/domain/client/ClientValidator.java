@@ -122,7 +122,7 @@ public class ClientValidator extends Validator {
      */
     private void checkCompanySectorConstraints() {
         final var companySector = this.client.getCompanySector();
-        if (companySector == null || companySector.isEmpty() || companySector.isBlank()) {
+        if (companySector == null || companySector.isBlank()) {
             this.getValidationHandler().append(new ErrorData("Company sector is required"));
         }
     }
@@ -157,7 +157,7 @@ public class ClientValidator extends Validator {
      */
     private void checkCompanyNameConstraints() {
         final String companyName = this.client.getCompanyName();
-        if (companyName == null || companyName.isEmpty() || companyName.isBlank()) {
+        if (companyName == null || companyName.isBlank()) {
             this.getValidationHandler().append(new ErrorData("Company name is required"));
         }
     }
@@ -190,7 +190,7 @@ public class ClientValidator extends Validator {
      */
     private void checkCompanyBranchConstraints() {
         final var companyBranch = this.client.getCompanyBranch();
-        if (companyBranch == null || companyBranch.isEmpty() || companyBranch.isBlank()) {
+        if (companyBranch == null || companyBranch.isBlank()) {
             this.getValidationHandler().append(new ErrorData("Company branch is required"));
         }
     }

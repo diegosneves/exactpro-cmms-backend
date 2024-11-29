@@ -29,5 +29,16 @@ public class AddressMySQLGateway {
         return addressSearchResult.orElseGet(() -> this.addressRepository.saveAndFlush(AddressJpaEntity.from(anAddress)));
     }
 
+    public Long count() {
+        return this.addressRepository.count();
+    }
+
+    public void deleteAddress(Address addressToDelete) {
+        if (addressToDelete == null) return;
+        Optional<AddressJpaEntity> foundAddress = this.addressRepository
+                .findAddressJpaEntitiesByNumberAndZip(addressToDelete.getNumber(), addressToDelete.getZip());
+        foundAddress.ifPresent(addressJpaEntity -> this.addressRepository.deleteById(addressJpaEntity.getId()));
+        this.addressRepository.flush();
+    }
 
 }

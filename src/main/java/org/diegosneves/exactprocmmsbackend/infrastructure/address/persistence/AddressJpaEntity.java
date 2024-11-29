@@ -52,7 +52,7 @@ public class AddressJpaEntity {
     }
 
     public static AddressJpaEntity from(final Address anAddress) {
-        return new AddressJpaEntity(
+        return anAddress == null ? null : new AddressJpaEntity(
                 anAddress.getStreet(),
                 anAddress.getNumber(),
                 anAddress.getNeighborhood(),

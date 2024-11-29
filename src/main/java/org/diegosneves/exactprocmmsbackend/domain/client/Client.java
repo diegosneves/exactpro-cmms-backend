@@ -97,6 +97,14 @@ public class Client extends Entity<ClientID> {
         return contact;
     }
 
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
+    public void setContact(Contact contact) {
+        this.contact = contact;
+    }
+
     @Override
     public void validate(ValidationHandler handler) {
         new ClientValidator(this, handler).validate();

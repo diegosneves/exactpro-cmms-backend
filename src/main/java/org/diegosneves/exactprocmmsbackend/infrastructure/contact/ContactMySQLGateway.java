@@ -27,8 +27,19 @@ public class ContactMySQLGateway {
 
     private ContactJpaEntity createOrUpdateContact(Contact aContact) {
         aContact.validate(new ThrowsValidationHandler());
-        Optional<ContactJpaEntity> existingContact = this.contactRepository.findContactJpaEntitiesByEmailAndPhone(aContact.getEmail(), aContact.getPhone());
+        Optional<ContactJpaEntity> existingContact = this.contactRepository
+                .findContactJpaEntitiesByEmailAndPhone(aContact.getEmail(), aContact.getPhone());
         return existingContact.orElseGet(() -> this.contactRepository.saveAndFlush(ContactJpaEntity.from(aContact)));
     }
 
+    public Long count() {
+        return this.contactRepository.count();
+    }
+
+    public void deleteContact(Contact oldContact) {
+        if (oldContact == null) return;
+        Optional<ContactJpaEntity> foundContactEntity = this.contactRepository
+                .findContactJpaEntitiesByEmailAndPhone(oldContact.getEmail(), oldContact.getPhone());
+        foundContactEntity.ifPresent(contactJpaEntity -> this.contactRepository.deleteById(contactJpaEntity.getId()));
+    }
 }
