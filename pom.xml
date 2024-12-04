@@ -11,8 +11,14 @@
     <groupId>org.diegosneves</groupId>
     <artifactId>exactpro-cmms-backend</artifactId>
     <version>0.0.1-SNAPSHOT</version>
+    <packaging>pom</packaging>
     <name>exactpro-cmms-backend</name>
     <description>exactpro-cmms-backend</description>
+    <modules>
+        <module>application</module>
+        <module>domain</module>
+        <module>infrastructure</module>
+    </modules>
     <properties>
         <java.version>17</java.version>
         <!-- properties for Sonar -->
@@ -56,45 +62,45 @@
 
     <dependencies>
 
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-security</artifactId>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.boot</groupId>-->
+<!--            <artifactId>spring-boot-starter-security</artifactId>-->
+<!--        </dependency>-->
 
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-undertow</artifactId>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.boot</groupId>-->
+<!--            <artifactId>spring-boot-starter-undertow</artifactId>-->
+<!--        </dependency>-->
 
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <optional>true</optional>
         </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter</artifactId>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.boot</groupId>-->
+<!--            <artifactId>spring-boot-starter</artifactId>-->
+<!--        </dependency>-->
 
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.boot</groupId>-->
+<!--            <artifactId>spring-boot-starter-test</artifactId>-->
+<!--            <scope>test</scope>-->
+<!--        </dependency>-->
 
-        <!-- MySQL Connector -->
-        <dependency>
-            <groupId>com.mysql</groupId>
-            <artifactId>mysql-connector-j</artifactId>
-            <scope>runtime</scope>
-        </dependency>
+<!--        &lt;!&ndash; MySQL Connector &ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>com.mysql</groupId>-->
+<!--            <artifactId>mysql-connector-j</artifactId>-->
+<!--            <scope>runtime</scope>-->
+<!--        </dependency>-->
 
 
-        <dependency>
-            <groupId>com.h2database</groupId>
-            <artifactId>h2</artifactId>
-            <scope>test</scope>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>com.h2database</groupId>-->
+<!--            <artifactId>h2</artifactId>-->
+<!--            <scope>test</scope>-->
+<!--        </dependency>-->
 
         <!-- Junit 5 -->
         <dependency>
@@ -112,52 +118,52 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- Swagger -->
-        <dependency>
-            <groupId>org.springdoc</groupId>
-            <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
-            <version>2.3.0</version>
-        </dependency>
+<!--        &lt;!&ndash; Swagger &ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>org.springdoc</groupId>-->
+<!--            <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>-->
+<!--            <version>2.3.0</version>-->
+<!--        </dependency>-->
 
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-jpa</artifactId>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.boot</groupId>-->
+<!--            <artifactId>spring-boot-starter-data-jpa</artifactId>-->
+<!--        </dependency>-->
 
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-thymeleaf</artifactId>
-            <version>3.3.2</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.boot</groupId>-->
+<!--            <artifactId>spring-boot-starter-thymeleaf</artifactId>-->
+<!--            <version>3.3.2</version>-->
+<!--        </dependency>-->
 
-        <dependency>
-            <groupId>org.xhtmlrenderer</groupId>
-            <artifactId>flying-saucer-core</artifactId>
-            <version>9.9.0</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.xhtmlrenderer</groupId>-->
+<!--            <artifactId>flying-saucer-core</artifactId>-->
+<!--            <version>9.9.0</version>-->
+<!--        </dependency>-->
 
-        <dependency>
-            <groupId>org.xhtmlrenderer</groupId>
-            <artifactId>flying-saucer-pdf-itext5</artifactId>
-            <version>9.7.2</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.xhtmlrenderer</groupId>-->
+<!--            <artifactId>flying-saucer-pdf-itext5</artifactId>-->
+<!--            <version>9.7.2</version>-->
+<!--        </dependency>-->
 
-        <dependency>
-            <groupId>org.w3c</groupId>
-            <artifactId>dom</artifactId>
-            <version>2.3.0-jaxb-1.0.6</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.w3c</groupId>-->
+<!--            <artifactId>dom</artifactId>-->
+<!--            <version>2.3.0-jaxb-1.0.6</version>-->
+<!--        </dependency>-->
         <dependency>
             <groupId>io.vavr</groupId>
             <artifactId>vavr</artifactId>
             <version>0.10.5</version>
         </dependency>
 
-        <dependency>
-            <groupId>org.flywaydb</groupId>
-            <artifactId>flyway-mysql</artifactId>
-            <version>10.15.2</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.flywaydb</groupId>-->
+<!--            <artifactId>flyway-mysql</artifactId>-->
+<!--            <version>10.15.2</version>-->
+<!--        </dependency>-->
 
     </dependencies>
 
@@ -176,19 +182,19 @@
                     </excludes>
                 </configuration>
             </plugin>
-            <plugin>
-                <groupId>org.springdoc</groupId>
-                <artifactId>springdoc-openapi-maven-plugin</artifactId>
-                <version>1.4</version>
-                <executions>
-                    <execution>
-                        <id>integration-test</id>
-                        <goals>
-                            <goal>generate</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
+<!--            <plugin>-->
+<!--                <groupId>org.springdoc</groupId>-->
+<!--                <artifactId>springdoc-openapi-maven-plugin</artifactId>-->
+<!--                <version>1.4</version>-->
+<!--                <executions>-->
+<!--                    <execution>-->
+<!--                        <id>integration-test</id>-->
+<!--                        <goals>-->
+<!--                            <goal>generate</goal>-->
+<!--                        </goals>-->
+<!--                    </execution>-->
+<!--                </executions>-->
+<!--            </plugin>-->
             <!-- Include JaCoCo plugin -->
             <plugin>
                 <groupId>org.sonarsource.scanner.maven</groupId>
@@ -221,20 +227,20 @@
                     </execution>
                 </executions>
             </plugin>
-            <plugin>
-                <groupId>org.flywaydb</groupId>
-                <artifactId>flyway-maven-plugin</artifactId>
-                <version>10.15.2</version>
-                <configuration>
-                    <url>jdbc:mysql://localhost:3307/exactpro_db</url>
-                    <user>root</user>
-                    <password>${env.DB_PASSWORD}</password>
-                    <cleanDisabled>false</cleanDisabled>
-                    <locations>
-                        <location>filesystem:src/main/resources/db/migration</location>
-                    </locations>
-                </configuration>
-            </plugin>
+<!--            <plugin>-->
+<!--                <groupId>org.flywaydb</groupId>-->
+<!--                <artifactId>flyway-maven-plugin</artifactId>-->
+<!--                <version>10.15.2</version>-->
+<!--                <configuration>-->
+<!--                    <url>jdbc:mysql://localhost:3307/exactpro_db</url>-->
+<!--                    <user>root</user>-->
+<!--                    <password>${env.DB_PASSWORD}</password>-->
+<!--                    <cleanDisabled>false</cleanDisabled>-->
+<!--                    <locations>-->
+<!--                        <location>filesystem:src/main/resources/db/migration</location>-->
+<!--                    </locations>-->
+<!--                </configuration>-->
+<!--            </plugin>-->
         </plugins>
     </build>
     <repositories>
