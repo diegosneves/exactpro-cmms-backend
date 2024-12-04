@@ -27,11 +27,11 @@ public class RegexPatternCompileUtil {
     }
 
     private static boolean isValidRegex(String regex) {
-        return regex != null && !regex.isEmpty() && !regex.isBlank();
+        return regex != null && !regex.isBlank();
     }
 
     private static boolean isValidInput(String input) {
-        return input != null && !input.isEmpty() && !input.isBlank();
+        return input != null && !input.isBlank();
     }
 
 }
