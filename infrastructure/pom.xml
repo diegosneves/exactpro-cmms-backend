@@ -17,13 +17,6 @@
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-        <sonar.projectKey>exactpro-cmms-backend</sonar.projectKey>
-        <sonar.organization>diegosneves</sonar.organization>
-        <sonar.host.url>https://sonarcloud.io</sonar.host.url>
-        <!-- path to jacoco reports -->
-        <sonar.coverage.jacoco.xmlReportPaths>${project.basedir}/target/site/jacoco/jacoco.xml
-        </sonar.coverage.jacoco.xmlReportPaths>
-
         <sonar.coverage.exclusions>
             **/dto/**,
             **/model/**,
