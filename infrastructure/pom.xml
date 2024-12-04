@@ -144,7 +144,7 @@
                                 **/factory/**,
                                 **/pagination/**,
                                 **/utils/**,
-                                **/persistence/**,
+                                **/org/diegosneves/infrastructure/*/persistence/**,
                                 **/org/diegosneves/infrastructure/ExactproCmmsBackendApplication.java
                             </value>
                         </property>

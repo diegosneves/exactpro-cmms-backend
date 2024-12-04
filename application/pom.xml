@@ -62,9 +62,9 @@
                                 **/pagination/**,
                                 **/utils/**,
                                 **/persistence/**,
-                                **/UseCase.java,
-                                **/UnitUseCase.java,
-                                **/NullaryUseCase.java
+                                **/org/diegosneves/application/UseCase.java,
+                                **/org/diegosneves/application/UnitUseCase.java,
+                                **/org/diegosneves/application/NullaryUseCase.java
                             </value>
                         </property>
                     </properties>

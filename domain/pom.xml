@@ -56,7 +56,7 @@
                                 **/org/diegosneves/domain/AggregateRoot.java,
                                 **/org/diegosneves/domain/Identifier.java,
                                 **/org/diegosneves/domain/ValueObject.java,
-                                **/org/diegosneves/domain/client/ClientSearchQuery.java
+                                **/org/diegosneves/domain/*/ClientSearchQuery.java
                             </value>
                         </property>
                     </properties>
