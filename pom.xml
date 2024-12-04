@@ -31,34 +31,6 @@
 
         <!-- properties for JaCoCo -->
         <jacoco.version>0.8.10</jacoco.version>
-<!--        <sonar.coverage.exclusions>-->
-<!--            **/dto/**,-->
-<!--            **/model/**,-->
-<!--            **/adapter/**,-->
-<!--            **/response/**,-->
-<!--            **/request/**,-->
-<!--&lt;!&ndash;            **/infrastructure/**,&ndash;&gt;-->
-<!--            **/configuration/**,-->
-<!--            **/controllers/**,-->
-<!--            **/enums/**,-->
-<!--            **/exceptions/**,-->
-<!--            **/mappers/**,-->
-<!--            **/factory/**,-->
-<!--            **/pagination/**,-->
-<!--            **/utils/**,-->
-<!--            **/validation/**,-->
-<!--            **/org/diegosneves/application/UseCase.java,-->
-<!--            **/org/diegosneves/application/UnitUseCase.java,-->
-<!--            **/org/diegosneves/application/NullaryUseCase.java,-->
-<!--            **/org/diegosneves/domain/Entity.java,-->
-<!--            **/org/diegosneves/domain/AggregateRoot.java,-->
-<!--            **/org/diegosneves/domain/Identifier.java,-->
-<!--            **/org/diegosneves/domain/ValueObject.java,-->
-<!--            **/org/diegosneves/domain/client/ClientSearchQuery.java,-->
-<!--            **/org/diegosneves/infrastructure/client/**,-->
-<!--            **/org/diegosneves/infrastructure/configuration/**,-->
-<!--            **/org/diegosneves/infrastructure/ExactproCmmsBackendApplication.java-->
-<!--        </sonar.coverage.exclusions>-->
     </properties>
 
     <dependencies>
@@ -112,6 +84,7 @@
                 <configuration>
                     <excludes>
                         <exclude>**/configuration/**</exclude>
+                        <exclude>**/WebSecurityConfig.java</exclude>
                     </excludes>
                 </configuration>
                 <executions>
