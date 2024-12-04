@@ -1,11 +1,9 @@
-package org.diegosneves.exactprocmmsbackend.infrastructure.api;
+package org.diegosneves.exactprocmmsbackend.infrastructure.configuration.web;
 
 import lombok.extern.slf4j.Slf4j;
 import org.diegosneves.exactprocmmsbackend.domain.exceptions.DomainException;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 /**
@@ -26,11 +24,11 @@ public class GlobalExceptionHandler {
      * @param exception A exceção que ocorreu.
      * @return Uma {@link ResponseEntity} contendo um {@link DomainException} com a mensagem da exceção e um código de status HTTP
      */
-    @ExceptionHandler(Exception.class)
-    public ResponseEntity<DomainException> handleFailures(Exception exception) {
-        DomainException dto = new DomainException(exception.getMessage(), HttpStatus.BAD_REQUEST.value());
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(dto);
-    }
+//    @ExceptionHandler(Exception.class)
+//    public ResponseEntity<DomainException> handleFailures(Exception exception) {
+//        DomainException dto = new DomainException(exception.getMessage(), HttpStatus.BAD_REQUEST.value());
+//        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(dto);
+//    }
 
     /**
      * Esta é uma função que lida com exceções do tipo {@link HttpMessageNotReadableException} em todo o controlador.
@@ -43,13 +41,13 @@ public class GlobalExceptionHandler {
      * O valor de HttpStatus para {@code BAD_REQUEST} é 400, o que indica que a solicitação era inválida ou não pôde ser entendida pelo servidor.
      * @apiNote {@link HttpMessageNotReadableException} Esta exceção é lançada quando ocorre um erro de sintaxe no corpo HTTP da solicitação, o que significa que a solicitação não pode ser lida.
      */
-    @ExceptionHandler(HttpMessageNotReadableException.class)
-    public ResponseEntity<DomainException> handleJSONFailures(HttpMessageNotReadableException exception) {
-        String message = "Não foi possível processar o conteúdo da solicitação. Por favor, confira se os dados foram inseridos corretamente.";
-        DomainException dto = new DomainException(message, HttpStatus.BAD_REQUEST.value());
-        log.error(exception.getMessage(), exception);
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(dto);
-    }
+//    @ExceptionHandler(HttpMessageNotReadableException.class)
+//    public ResponseEntity<DomainException> handleJSONFailures(HttpMessageNotReadableException exception) {
+//        String message = "Não foi possível processar o conteúdo da solicitação. Por favor, confira se os dados foram inseridos corretamente.";
+////        DomainException dto = new DomainException(message, HttpStatus.BAD_REQUEST.value());
+//        log.error(exception.getMessage(), exception);
+//        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(dto);
+//    }
 
 
 }
