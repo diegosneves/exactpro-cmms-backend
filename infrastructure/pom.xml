@@ -33,6 +33,8 @@
             **/utils/**,
             **/persistence/**,
             **/configuration/**,
+            **org/diegosneves/infrastructure/configuration/web/CorsConfig.java,
+            **org/diegosneves/infrastructure/configuration/web/WebSecurityConfig.java,
             **/org/diegosneves/infrastructure/ExactproCmmsBackendApplication.java
         </sonar.coverage.exclusions>
 
