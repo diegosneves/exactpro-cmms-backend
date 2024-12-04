@@ -1,8 +1,11 @@
 package org.diegosneves.domain.utils;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+@Slf4j
 public class RegexPatternCompileUtil {
 
     private RegexPatternCompileUtil() {
@@ -16,6 +19,7 @@ public class RegexPatternCompileUtil {
         try {
             pattern = Pattern.compile(regex);
         } catch (Exception ignore) {
+            log.error("Regex Pattern invalid -> {}", regex);
             return false;
         }
         Matcher matcher = pattern.matcher(input);
