@@ -15,6 +15,25 @@
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <sonar.coverage.exclusions>-->
+            **/dto/**,
+            **/model/**,
+            **/adapter/**,
+            **/response/**,
+            **/request/**,
+            **/configuration/**,
+            **/controllers/**,
+            **/enums/**,
+            **/exceptions/**,
+            **/mappers/**,
+            **/factory/**,
+            **/pagination/**,
+            **/utils/**,
+            **/org/diegosneves/infrastructure/*/persistence/**,
+            **/org/diegosneves/infrastructure/ExactproCmmsBackendApplication.java
+        </sonar.coverage.exclusions>
+
     </properties>
 
     <dependencies>
@@ -119,55 +138,55 @@
                 <artifactId>sonar-maven-plugin</artifactId>
                 <version>3.9.1.2184</version>
                 <configuration>
-                    <sonar.sources>src/main/java</sonar.sources>
-                    <sonar.tests>src/test/java</sonar.tests>
-                    <sonar.coverage.exclusions>
-                        **/dto/**,
-                        **/model/**,
-                        **/adapter/**,
-                        **/response/**,
-                        **/request/**,
-                        **/configuration/**,
-                        **/controllers/**,
-                        **/enums/**,
-                        **/exceptions/**,
-                        **/mappers/**,
-                        **/factory/**,
-                        **/pagination/**,
-                        **/utils/**,
-                        **/org/diegosneves/infrastructure/*/persistence/**,
-                        **/org/diegosneves/infrastructure/ExactproCmmsBackendApplication.java
-                    </sonar.coverage.exclusions>
-<!--                    <properties>-->
-<!--                        <property>-->
-<!--                            <key>sonar.sources</key>-->
-<!--                            <value>src/main/java</value>-->
-<!--                        </property>-->
-<!--                        <property>-->
-<!--                            <key>sonar.tests</key>-->
-<!--                            <value>src/test/java</value>-->
-<!--                        </property>-->
-<!--                        <property>-->
-<!--                            <key>sonar.coverage.exclusions</key>-->
-<!--                            <value>-->
-<!--                                **/dto/**,-->
-<!--                                **/model/**,-->
-<!--                                **/adapter/**,-->
-<!--                                **/response/**,-->
-<!--                                **/request/**,-->
-<!--                                **/configuration/**,-->
-<!--                                **/controllers/**,-->
-<!--                                **/enums/**,-->
-<!--                                **/exceptions/**,-->
-<!--                                **/mappers/**,-->
-<!--                                **/factory/**,-->
-<!--                                **/pagination/**,-->
-<!--                                **/utils/**,-->
-<!--                                **/org/diegosneves/infrastructure/*/persistence/**,-->
-<!--                                **/org/diegosneves/infrastructure/ExactproCmmsBackendApplication.java-->
-<!--                            </value>-->
-<!--                        </property>-->
-<!--                    </properties>-->
+                    <!--                    <sonar.sources>src/main/java</sonar.sources>-->
+                    <!--                    <sonar.tests>src/test/java</sonar.tests>-->
+<!--                    <sonar.coverage.exclusions>-->
+<!--                        **/dto/**,-->
+<!--                        **/model/**,-->
+<!--                        **/adapter/**,-->
+<!--                        **/response/**,-->
+<!--                        **/request/**,-->
+<!--                        **/configuration/**,-->
+<!--                        **/controllers/**,-->
+<!--                        **/enums/**,-->
+<!--                        **/exceptions/**,-->
+<!--                        **/mappers/**,-->
+<!--                        **/factory/**,-->
+<!--                        **/pagination/**,-->
+<!--                        **/utils/**,-->
+<!--                        **/org/diegosneves/infrastructure/*/persistence/**,-->
+<!--                        **/org/diegosneves/infrastructure/ExactproCmmsBackendApplication.java-->
+<!--                    </sonar.coverage.exclusions>-->
+                    <!--                    <properties>-->
+                    <!--                        <property>-->
+                    <!--                            <key>sonar.sources</key>-->
+                    <!--                            <value>src/main/java</value>-->
+                    <!--                        </property>-->
+                    <!--                        <property>-->
+                    <!--                            <key>sonar.tests</key>-->
+                    <!--                            <value>src/test/java</value>-->
+                    <!--                        </property>-->
+                    <!--                        <property>-->
+                    <!--                            <key>sonar.coverage.exclusions</key>-->
+                    <!--                            <value>-->
+                    <!--                                **/dto/**,-->
+                    <!--                                **/model/**,-->
+                    <!--                                **/adapter/**,-->
+                    <!--                                **/response/**,-->
+                    <!--                                **/request/**,-->
+                    <!--                                **/configuration/**,-->
+                    <!--                                **/controllers/**,-->
+                    <!--                                **/enums/**,-->
+                    <!--                                **/exceptions/**,-->
+                    <!--                                **/mappers/**,-->
+                    <!--                                **/factory/**,-->
+                    <!--                                **/pagination/**,-->
+                    <!--                                **/utils/**,-->
+                    <!--                                **/org/diegosneves/infrastructure/*/persistence/**,-->
+                    <!--                                **/org/diegosneves/infrastructure/ExactproCmmsBackendApplication.java-->
+                    <!--                            </value>-->
+                    <!--                        </property>-->
+                    <!--                    </properties>-->
                 </configuration>
             </plugin>
             <plugin>
