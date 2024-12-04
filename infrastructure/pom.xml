@@ -29,9 +29,10 @@
             **/mappers/**,
             **/factory/**,
             **/pagination/**,
+            **/web/**,
             **/utils/**,
-            **/org/diegosneves/infrastructure/*/persistence/**,
-            **/org/diegosneves/infrastructure/configuration/**,
+            **/persistence/**,
+            **/configuration/**,
             **/org/diegosneves/infrastructure/ExactproCmmsBackendApplication.java
         </sonar.coverage.exclusions>
 
