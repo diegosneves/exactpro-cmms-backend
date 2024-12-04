@@ -15,6 +15,27 @@
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <sonar.coverage.exclusions>
+            **/dto/**,
+            **/model/**,
+            **/adapter/**,
+            **/response/**,
+            **/request/**,
+            **/configuration/**,
+            **/controllers/**,
+            **/enums/**,
+            **/exceptions/**,
+            **/mappers/**,
+            **/factory/**,
+            **/pagination/**,
+            **/utils/**,
+            **/persistence/**,
+            **/org/diegosneves/application/UseCase.java,
+            **/org/diegosneves/application/UnitUseCase.java,
+            **/org/diegosneves/application/NullaryUseCase.java
+        </sonar.coverage.exclusions>
+
     </properties>
 
     <dependencies>
@@ -26,53 +47,5 @@
         </dependency>
 
     </dependencies>
-
-    <build>
-
-        <plugins>
-
-            <plugin>
-                <groupId>org.sonarsource.scanner.maven</groupId>
-                <artifactId>sonar-maven-plugin</artifactId>
-                <version>3.9.1.2184</version>
-                <configuration>
-                    <properties>
-                        <property>
-                            <key>sonar.sources</key>
-                            <value>src/main/java</value>
-                        </property>
-                        <property>
-                            <key>sonar.tests</key>
-                            <value>src/test/java</value>
-                        </property>
-                        <property>
-                            <key>sonar.coverage.exclusions</key>
-                            <value>
-                                **/dto/**,
-                                **/model/**,
-                                **/adapter/**,
-                                **/response/**,
-                                **/request/**,
-                                **/configuration/**,
-                                **/controllers/**,
-                                **/enums/**,
-                                **/exceptions/**,
-                                **/mappers/**,
-                                **/factory/**,
-                                **/pagination/**,
-                                **/utils/**,
-                                **/persistence/**,
-                                **/org/diegosneves/application/UseCase.java,
-                                **/org/diegosneves/application/UnitUseCase.java,
-                                **/org/diegosneves/application/NullaryUseCase.java
-                            </value>
-                        </property>
-                    </properties>
-                </configuration>
-            </plugin>
-
-        </plugins>
-
-    </build>
 
 </project>

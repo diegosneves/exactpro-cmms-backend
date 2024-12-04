@@ -15,56 +15,29 @@
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <sonar.coverage.exclusions>
+            **/dto/**,
+            **/model/**,
+            **/adapter/**,
+            **/response/**,
+            **/request/**,
+            **/configuration/**,
+            **/controllers/**,
+            **/enums/**,
+            **/exceptions/**,
+            **/mappers/**,
+            **/factory/**,
+            **/pagination/**,
+            **/utils/**,
+            **/persistence/**,
+            **/org/diegosneves/domain/Entity.java,
+            **/org/diegosneves/domain/AggregateRoot.java,
+            **/org/diegosneves/domain/Identifier.java,
+            **/org/diegosneves/domain/ValueObject.java,
+            **/org/diegosneves/domain/*/ClientSearchQuery.java
+        </sonar.coverage.exclusions>
+
     </properties>
-
-    <build>
-
-        <plugins>
-
-            <plugin>
-                <groupId>org.sonarsource.scanner.maven</groupId>
-                <artifactId>sonar-maven-plugin</artifactId>
-                <version>3.9.1.2184</version>
-                <configuration>
-                    <properties>
-                        <property>
-                            <key>sonar.sources</key>
-                            <value>src/main/java</value>
-                        </property>
-                        <property>
-                            <key>sonar.tests</key>
-                            <value>src/test/java</value>
-                        </property>
-                        <property>
-                            <key>sonar.coverage.exclusions</key>
-                            <value>
-                                **/dto/**,
-                                **/model/**,
-                                **/adapter/**,
-                                **/response/**,
-                                **/request/**,
-                                **/configuration/**,
-                                **/controllers/**,
-                                **/enums/**,
-                                **/exceptions/**,
-                                **/mappers/**,
-                                **/factory/**,
-                                **/pagination/**,
-                                **/utils/**,
-                                **/persistence/**,
-                                **/org/diegosneves/domain/Entity.java,
-                                **/org/diegosneves/domain/AggregateRoot.java,
-                                **/org/diegosneves/domain/Identifier.java,
-                                **/org/diegosneves/domain/ValueObject.java,
-                                **/org/diegosneves/domain/*/ClientSearchQuery.java
-                            </value>
-                        </property>
-                    </properties>
-                </configuration>
-            </plugin>
-
-        </plugins>
-
-    </build>
 
 </project>
