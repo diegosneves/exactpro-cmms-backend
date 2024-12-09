@@ -1,7 +1,6 @@
 package org.diegosneves.infrastructure;
 
 
-import org.diegosneves.infrastructure.client.CleanUpExtension;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;

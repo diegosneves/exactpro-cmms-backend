@@ -1,6 +1,5 @@
-package org.diegosneves.application.domain.client;
+package org.diegosneves.domain.client;
 
-import org.diegosneves.domain.client.Client;
 import org.diegosneves.domain.client.valueobject.Address;
 import org.diegosneves.domain.client.valueobject.Contact;
 import org.diegosneves.domain.exceptions.DomainException;

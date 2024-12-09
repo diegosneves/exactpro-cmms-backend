@@ -1,4 +1,4 @@
-package org.diegosneves.application.application.client.update;
+package org.diegosneves.application.client.update;
 
 import org.diegosneves.application.client.update.DefaultUpdateClientUseCase;
 import org.diegosneves.application.client.update.UpdateClientCommand;

@@ -1,6 +1,5 @@
-package org.diegosneves.application.domain.client;
+package org.diegosneves.domain.client;
 
-import org.diegosneves.domain.client.ClientID;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

@@ -1,4 +1,4 @@
-package org.diegosneves.application.application.client.retrieve.list;
+package org.diegosneves.application.client.retrieve.list;
 
 import org.diegosneves.application.client.retrieve.list.ClientListOutput;
 import org.diegosneves.application.client.retrieve.list.DefaultListClientsUseCase;

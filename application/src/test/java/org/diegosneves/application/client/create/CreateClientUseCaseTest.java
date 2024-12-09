@@ -1,4 +1,4 @@
-package org.diegosneves.application.application.client.create;
+package org.diegosneves.application.client.create;
 
 import org.diegosneves.application.client.create.CreateClientCommand;
 import org.diegosneves.application.client.create.DefaultCreateClientUseCase;

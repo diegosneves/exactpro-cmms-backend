@@ -1,4 +1,4 @@
-package org.diegosneves.application.application.client.delete;
+package org.diegosneves.application.client.delete;
 
 import org.diegosneves.application.client.delete.DefaultDeleteClientUseCase;
 import org.diegosneves.domain.client.Client;

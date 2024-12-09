@@ -1,4 +1,4 @@
-package org.diegosneves.application.application.client.retrieve.get;
+package org.diegosneves.application.client.retrieve.get;
 
 import org.diegosneves.application.client.retrieve.get.DefaultGetClientByIdUseCase;
 import org.diegosneves.domain.client.Client;

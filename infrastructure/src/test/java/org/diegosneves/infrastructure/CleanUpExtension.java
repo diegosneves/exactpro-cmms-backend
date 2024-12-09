@@ -1,4 +1,4 @@
-package org.diegosneves.infrastructure.client;
+package org.diegosneves.infrastructure;
 
 import org.junit.jupiter.api.extension.BeforeEachCallback;
 import org.junit.jupiter.api.extension.ExtensionContext;
