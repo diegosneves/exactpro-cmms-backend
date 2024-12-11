@@ -115,7 +115,7 @@ services:
       - db-mysql-exactpro:/var/lib/mysql
 
   exactpro-app:
-    image: diegoneves/exactpro:latest
+    image: diegoneves/exactpro-cmms-backend:latest
     container_name: exactpro-api
     ports:
       - "8080:8080"
@@ -128,7 +128,7 @@ services:
       - DB_NAME=${DB_NAME}
       - DB_USERNAME=${DB_USERNAME}
       - DB_PASSWORD=${DB_PASSWORD}
-    entrypoint: sh -c "dockerize -wait tcp://$${DB_HOST}:$${DB_PORT} -timeout 20s && java -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005 -jar target/exactpro-cmms-backend.jar"
+    entrypoint: sh -c "dockerize -wait tcp://$${DB_HOST}:$${DB_PORT} -timeout 20s && java -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005 -jar infrastructure/target/exactpro-cmms.jar"
 
 volumes:
   db-mysql-exactpro:
