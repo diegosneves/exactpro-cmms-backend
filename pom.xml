@@ -12,7 +12,6 @@
     <artifactId>exactpro-cmms-backend</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
-    <name>exactpro-cmms-backend</name>
     <description>exactpro-cmms-backend</description>
     <modules>
         <module>application</module>

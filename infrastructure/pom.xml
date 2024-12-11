@@ -10,7 +10,6 @@
     </parent>
 
     <artifactId>infrastructure</artifactId>
-    <name>exactpro-cmms-backend</name>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
@@ -128,8 +127,7 @@
     </dependencies>
 
     <build>
-
-        <finalName>${project.name}</finalName>
+        <finalName>exactpro-cmms</finalName>
         <plugins>
             <plugin>
                <groupId>org.apache.maven.plugins</groupId>
