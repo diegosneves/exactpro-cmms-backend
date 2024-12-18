@@ -1,6 +1,5 @@
 package org.diegosneves.application.client.delete;
 
-import org.diegosneves.application.client.delete.DefaultDeleteClientUseCase;
 import org.diegosneves.domain.client.Client;
 import org.diegosneves.domain.client.ClientGateway;
 import org.diegosneves.domain.client.ClientID;
@@ -68,10 +67,11 @@ class DeleteClientUseCaseTest {
         final var expectedContact = new Contact("email@email.com", "12334567896");
         final var aClient = Client.newClient("90.265.697/0001-15", expectedAddress, expectedContact, "expectedCompanyName", "expectedCompanyBranch", "expectedCompanySector");
         final var expectedId = aClient.getId();
+        final var clientId = expectedId.getValue();
 
         doThrow(new IllegalStateException("Gateway Error")).when(this.clientGateway).deleteById(expectedId);
 
-        final var actualException = assertThrows(IllegalStateException.class, () -> this.useCase.execute(expectedId.getValue()));
+        final var actualException = assertThrows(IllegalStateException.class, () -> this.useCase.execute(clientId));
 
         verify(this.clientGateway, times(1)).deleteById(expectedId);
 

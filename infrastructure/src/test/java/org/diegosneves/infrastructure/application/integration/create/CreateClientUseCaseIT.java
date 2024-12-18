@@ -60,7 +60,7 @@ class CreateClientUseCaseIT {
     }
 
     @Test
-    void givenValidCreateClientCommand_whenGatewayThrowsException_thenExceptionIsPropagated() {
+    void givenValidCreateClientCommandWithInvalidCnpjWhenCallTheExecuteMethodThenAnExceptionIsPropagated() {
         final var cnpj = "";
         final var address = new Address("Rua", "333", "Bairro", "Cidade", "RS", "82456789");
         final var contact = new Contact("email@email.com", "12334567896");
