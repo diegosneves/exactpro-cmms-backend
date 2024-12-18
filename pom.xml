@@ -11,8 +11,13 @@
     <groupId>org.diegosneves</groupId>
     <artifactId>exactpro-cmms-backend</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>exactpro-cmms-backend</name>
+    <packaging>pom</packaging>
     <description>exactpro-cmms-backend</description>
+    <modules>
+        <module>application</module>
+        <module>domain</module>
+        <module>infrastructure</module>
+    </modules>
     <properties>
         <java.version>17</java.version>
         <!-- properties for Sonar -->
@@ -25,75 +30,19 @@
 
         <!-- properties for JaCoCo -->
         <jacoco.version>0.8.10</jacoco.version>
-        <sonar.coverage.exclusions>
-            **/dto/**,
-            **/model/**,
-            **/adapter/**,
-            **/response/**,
-            **/request/**,
-            **/infrastructure/**,
-            **/configuration/**,
-            **/controllers/**,
-            **/enums/**,
-            **/exceptions/**,
-            **/mappers/**,
-            **/factory/**,
-            **/pagination/**,
-            **/utils/**,
-            **/validation/**,
-            **/org/diegosneves/exactprocmmsbackend/application/UseCase.java,
-            **/org/diegosneves/exactprocmmsbackend/application/UnitUseCase.java,
-            **/org/diegosneves/exactprocmmsbackend/application/NullaryUseCase.java,
-            **/org/diegosneves/exactprocmmsbackend/domain/Entity.java,
-            **/org/diegosneves/exactprocmmsbackend/domain/AggregateRoot.java,
-            **/org/diegosneves/exactprocmmsbackend/domain/Identifier.java,
-            **/org/diegosneves/exactprocmmsbackend/domain/ValueObject.java,
-            **/org/diegosneves/exactprocmmsbackend/domain/client/ClientSearchQuery.java,
-            **/org/diegosneves/exactprocmmsbackend/infrastructure/client/**,
-            **/org/diegosneves/exactprocmmsbackend/ExactproCmmsBackendApplication.java
-        </sonar.coverage.exclusions>
     </properties>
 
     <dependencies>
 
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-security</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-undertow</artifactId>
-        </dependency>
-
-        <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <optional>true</optional>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter</artifactId>
+            <version>1.18.34</version>
         </dependency>
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
-        </dependency>
-
-        <!-- MySQL Connector -->
-        <dependency>
-            <groupId>com.mysql</groupId>
-            <artifactId>mysql-connector-j</artifactId>
-            <scope>runtime</scope>
-        </dependency>
-
-
-        <dependency>
-            <groupId>com.h2database</groupId>
-            <artifactId>h2</artifactId>
-            <scope>test</scope>
+            <artifactId>spring-boot-starter-logging</artifactId>
         </dependency>
 
         <!-- Junit 5 -->
@@ -112,51 +61,16 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- Swagger -->
-        <dependency>
-            <groupId>org.springdoc</groupId>
-            <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
-            <version>2.3.0</version>
-        </dependency>
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-jpa</artifactId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
         </dependency>
 
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-thymeleaf</artifactId>
-            <version>3.3.2</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.xhtmlrenderer</groupId>
-            <artifactId>flying-saucer-core</artifactId>
-            <version>9.9.0</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.xhtmlrenderer</groupId>
-            <artifactId>flying-saucer-pdf-itext5</artifactId>
-            <version>9.7.2</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.w3c</groupId>
-            <artifactId>dom</artifactId>
-            <version>2.3.0-jaxb-1.0.6</version>
-        </dependency>
         <dependency>
             <groupId>io.vavr</groupId>
             <artifactId>vavr</artifactId>
             <version>0.10.5</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.flywaydb</groupId>
-            <artifactId>flyway-mysql</artifactId>
-            <version>10.15.2</version>
         </dependency>
 
     </dependencies>
@@ -164,32 +78,6 @@
     <build>
         <finalName>${project.artifactId}</finalName>
         <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-                <configuration>
-                    <excludes>
-                        <exclude>
-                            <groupId>org.projectlombok</groupId>
-                            <artifactId>lombok</artifactId>
-                        </exclude>
-                    </excludes>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.springdoc</groupId>
-                <artifactId>springdoc-openapi-maven-plugin</artifactId>
-                <version>1.4</version>
-                <executions>
-                    <execution>
-                        <id>integration-test</id>
-                        <goals>
-                            <goal>generate</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <!-- Include JaCoCo plugin -->
             <plugin>
                 <groupId>org.sonarsource.scanner.maven</groupId>
                 <artifactId>sonar-maven-plugin</artifactId>
@@ -199,6 +87,12 @@
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
                 <version>${jacoco.version}</version>
+                <configuration>
+                    <excludes>
+                        <exclude>**/configuration/**</exclude>
+                        <exclude>**/WebSecurityConfig.java</exclude>
+                    </excludes>
+                </configuration>
                 <executions>
                     <execution>
                         <id>prepare-agent</id>
@@ -220,20 +114,6 @@
                         </configuration>
                     </execution>
                 </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.flywaydb</groupId>
-                <artifactId>flyway-maven-plugin</artifactId>
-                <version>10.15.2</version>
-                <configuration>
-                    <url>jdbc:mysql://localhost:3307/exactpro_db</url>
-                    <user>root</user>
-                    <password>${env.DB_PASSWORD}</password>
-                    <cleanDisabled>false</cleanDisabled>
-                    <locations>
-                        <location>filesystem:src/main/resources/db/migration</location>
-                    </locations>
-                </configuration>
             </plugin>
         </plugins>
     </build>
