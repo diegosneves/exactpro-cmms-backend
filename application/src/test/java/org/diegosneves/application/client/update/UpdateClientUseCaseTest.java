@@ -1,7 +1,5 @@
 package org.diegosneves.application.client.update;
 
-import org.diegosneves.application.client.update.DefaultUpdateClientUseCase;
-import org.diegosneves.application.client.update.UpdateClientCommand;
 import org.diegosneves.domain.client.Client;
 import org.diegosneves.domain.client.ClientGateway;
 import org.diegosneves.domain.client.ClientID;
