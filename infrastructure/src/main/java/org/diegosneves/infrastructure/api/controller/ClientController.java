@@ -3,7 +3,6 @@ package org.diegosneves.infrastructure.api.controller;
 import org.diegosneves.application.client.create.CreateClientCommand;
 import org.diegosneves.application.client.create.CreateClientOutput;
 import org.diegosneves.application.client.create.CreateClientUseCase;
-import org.diegosneves.domain.client.valueobject.Address;
 import org.diegosneves.domain.pagination.Pagination;
 import org.diegosneves.domain.validation.handler.Notification;
 import org.diegosneves.infrastructure.api.ClientAPI;
