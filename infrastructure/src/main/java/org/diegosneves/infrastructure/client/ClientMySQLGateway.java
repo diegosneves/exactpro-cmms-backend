@@ -6,7 +6,9 @@ import org.diegosneves.domain.client.ClientID;
 import org.diegosneves.domain.client.ClientSearchQuery;
 import org.diegosneves.domain.client.valueobject.Address;
 import org.diegosneves.domain.client.valueobject.Contact;
+import org.diegosneves.domain.exceptions.DomainException;
 import org.diegosneves.domain.pagination.Pagination;
+import org.diegosneves.domain.validation.ErrorData;
 import org.diegosneves.domain.validation.handler.ThrowsValidationHandler;
 import org.diegosneves.infrastructure.address.AddressMySQLGateway;
 import org.diegosneves.infrastructure.client.persistence.ClientJpaEntity;
@@ -39,6 +41,10 @@ public class ClientMySQLGateway implements ClientGateway {
     @Override
     public Client create(final Client aClient) {
         aClient.validate(new ThrowsValidationHandler());
+        Optional<ClientJpaEntity> areadyExists = this.clientRepository.findClientJpaEntityByCnpj(aClient.getCnpj());
+        if (areadyExists.isPresent()) {
+            throw DomainException.with(new ErrorData(String.format("O CNPJ %s já foi cadastrado!", aClient.getCnpj())));
+        }
         final var newClientEntity = this.clientRepository.save(ClientJpaEntity.from(aClient));
         return newClientEntity.toAggregate();
     }

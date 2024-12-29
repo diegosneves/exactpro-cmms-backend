@@ -5,10 +5,12 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.diegosneves.domain.pagination.Pagination;
+import org.diegosneves.infrastructure.client.model.CreateClientApiInput;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -25,7 +27,7 @@ public interface ClientAPI {
             @ApiResponse(responseCode = "201", description = "Created successfully"),
             @ApiResponse(responseCode = "422", description = "Unprocessable error"),
     })
-    ResponseEntity<?> createClient();
+    ResponseEntity<?> createClient(@RequestBody CreateClientApiInput input);
 
     @GetMapping
     @Operation(summary = "List all clients paginated")
