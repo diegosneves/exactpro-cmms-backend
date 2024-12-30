@@ -12,4 +12,8 @@ public record CreateContactApiInput(
     public Contact toContact() {
         return new Contact(email, phone);
     }
+
+    public static CreateContactApiInput fromContact(Contact contact) {
+        return new CreateContactApiInput(contact.getEmail(), contact.getPhone());
+    }
 }

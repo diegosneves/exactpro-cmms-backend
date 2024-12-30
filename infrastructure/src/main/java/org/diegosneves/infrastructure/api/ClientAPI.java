@@ -5,10 +5,12 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.diegosneves.domain.pagination.Pagination;
+import org.diegosneves.infrastructure.client.model.ClientApiOutput;
 import org.diegosneves.infrastructure.client.model.CreateClientApiInput;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -42,5 +44,17 @@ public interface ClientAPI {
             @RequestParam(name = "sort", required = false, defaultValue = "cnpj") final String sort,
             @RequestParam(name = "dir", required = false, defaultValue = "asc") final String direction
     );
+
+    @GetMapping(
+            value = "/{id}",
+            produces = MediaType.APPLICATION_JSON_VALUE
+//            consumes = MediaType.APPLICATION_JSON_VALUE
+    )
+    @Operation(summary = "Get a client by id")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Found successfully"),
+            @ApiResponse(responseCode = "404", description = "Not found"),
+    })
+    ClientApiOutput getById(@PathVariable(name = "id") String id);
 
 }

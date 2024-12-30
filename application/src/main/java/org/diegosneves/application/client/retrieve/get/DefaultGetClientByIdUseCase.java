@@ -1,16 +1,14 @@
 package org.diegosneves.application.client.retrieve.get;
 
+import org.diegosneves.domain.client.Client;
 import org.diegosneves.domain.client.ClientGateway;
 import org.diegosneves.domain.client.ClientID;
-import org.diegosneves.domain.exceptions.DomainException;
-import org.diegosneves.domain.validation.ErrorData;
+import org.diegosneves.domain.exceptions.NotFoundException;
 
 import java.util.Objects;
 import java.util.function.Supplier;
 
 public class DefaultGetClientByIdUseCase extends GetClientByIdUseCase {
-
-    public static final String CLIENT_NOT_FOUND_MESSAGE = "Não foi encontrado o cliente com o ID %s";
 
     private final ClientGateway clientGateway;
 
@@ -28,7 +26,7 @@ public class DefaultGetClientByIdUseCase extends GetClientByIdUseCase {
                 .orElseThrow(notFound(targetID));
     }
 
-    private static Supplier<DomainException> notFound(final ClientID anId) {
-        return () -> DomainException.with(new ErrorData(CLIENT_NOT_FOUND_MESSAGE.formatted(anId.getValue())));
+    private static Supplier<NotFoundException> notFound(final ClientID anId) {
+        return () -> NotFoundException.with(Client.class, anId);
     }
 }

@@ -1,12 +1,12 @@
 package org.diegosneves.application.client.retrieve.get;
 
-import org.diegosneves.application.client.retrieve.get.DefaultGetClientByIdUseCase;
 import org.diegosneves.domain.client.Client;
 import org.diegosneves.domain.client.ClientGateway;
 import org.diegosneves.domain.client.ClientID;
 import org.diegosneves.domain.client.valueobject.Address;
 import org.diegosneves.domain.client.valueobject.Contact;
 import org.diegosneves.domain.exceptions.DomainException;
+import org.diegosneves.domain.exceptions.NotFoundException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -68,8 +68,7 @@ class GetClientByIdUseCaseTest {
         final var actualException = assertThrows(DomainException.class, () -> this.useCase.execute(expectedId.getValue()));
 
         assertNotNull(actualException);
-        assertEquals(1, actualException.getErrors().size());
-        assertEquals(DefaultGetClientByIdUseCase.CLIENT_NOT_FOUND_MESSAGE.formatted(expectedId.getValue()), actualException.getMessage());
+        assertEquals(NotFoundException.ENTITY_NOT_FOUND_MESSAGE.formatted(Client.class.getSimpleName(), expectedId.getValue()), actualException.getMessage());
     }
 
     @Test

@@ -2,6 +2,8 @@ package org.diegosneves.infrastructure.configuration.web;
 
 import lombok.extern.slf4j.Slf4j;
 import org.diegosneves.domain.exceptions.DomainException;
+import org.diegosneves.domain.exceptions.NotFoundException;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -21,6 +23,11 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(DomainException.class)
     public ResponseEntity<ApiError> handleFailures(final DomainException exception) {
         return ResponseEntity.unprocessableEntity().body(ApiError.from(exception));
+    }
+
+    @ExceptionHandler(NotFoundException.class)
+    public ResponseEntity<ApiError> handleFailures(final NotFoundException exception) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ApiError.from(exception));
     }
 
 }

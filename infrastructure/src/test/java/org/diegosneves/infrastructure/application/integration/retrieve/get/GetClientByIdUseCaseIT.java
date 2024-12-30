@@ -1,12 +1,11 @@
 package org.diegosneves.infrastructure.application.integration.retrieve.get;
 
-import org.diegosneves.application.client.retrieve.get.DefaultGetClientByIdUseCase;
 import org.diegosneves.application.client.retrieve.get.GetClientByIdUseCase;
 import org.diegosneves.domain.client.Client;
 import org.diegosneves.domain.client.ClientID;
 import org.diegosneves.domain.client.valueobject.Address;
 import org.diegosneves.domain.client.valueobject.Contact;
-import org.diegosneves.domain.exceptions.DomainException;
+import org.diegosneves.domain.exceptions.NotFoundException;
 import org.diegosneves.infrastructure.IntegrationTest;
 import org.diegosneves.infrastructure.client.persistence.ClientJpaEntity;
 import org.diegosneves.infrastructure.client.persistence.ClientRepository;
@@ -73,11 +72,10 @@ class GetClientByIdUseCaseIT {
         final var expectedId = ClientID.from("123456789").getValue();
 
 
-        final var actualException = assertThrows(DomainException.class, () -> this.useCase.execute(expectedId));
+        final var actualException = assertThrows(NotFoundException.class, () -> this.useCase.execute(expectedId));
 
         assertNotNull(actualException);
-        assertEquals(1, actualException.getErrors().size());
-        assertEquals(DefaultGetClientByIdUseCase.CLIENT_NOT_FOUND_MESSAGE.formatted(expectedId), actualException.getMessage());
+        assertEquals(NotFoundException.ENTITY_NOT_FOUND_MESSAGE.formatted(Client.class.getSimpleName(), expectedId), actualException.getMessage());
     }
 
 

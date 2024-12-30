@@ -4,12 +4,18 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import io.vavr.API;
 import org.diegosneves.application.client.create.CreateClientOutput;
 import org.diegosneves.application.client.create.CreateClientUseCase;
+import org.diegosneves.application.client.retrieve.get.ClientOutput;
+import org.diegosneves.application.client.retrieve.get.GetClientByIdUseCase;
+import org.diegosneves.domain.client.Client;
 import org.diegosneves.domain.client.ClientID;
+import org.diegosneves.domain.client.valueobject.Address;
+import org.diegosneves.domain.client.valueobject.Contact;
 import org.diegosneves.domain.exceptions.DomainException;
+import org.diegosneves.domain.exceptions.NotFoundException;
 import org.diegosneves.domain.validation.ErrorData;
 import org.diegosneves.domain.validation.handler.Notification;
 import org.diegosneves.infrastructure.ControllerTest;
-import org.diegosneves.infrastructure.api.model.CreateAddressApiInput;
+import org.diegosneves.infrastructure.address.model.CreateAddressApiInput;
 import org.diegosneves.infrastructure.client.model.CreateClientApiInput;
 import org.diegosneves.infrastructure.contact.model.CreateContactApiInput;
 import org.hamcrest.Matchers;
@@ -23,11 +29,15 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import java.util.Objects;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.argThat;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 
 
@@ -43,11 +53,14 @@ class ClientAPITest {
     @MockBean
     private CreateClientUseCase createClientUseCase;
 
+    @MockBean
+    private GetClientByIdUseCase getClientByIdUseCase;
+
     @Test
     void shouldCreateClientGivenValidInput() throws Exception {
         final var expectedCnpj = "34494244000190";
-        final var expectedAddress = new CreateAddressApiInput("Rua", "333", "Bairro", "Cidade", "RS", "82456789");
-        final var expectedContact = new CreateContactApiInput("email@email.com", "12334567896");
+        final var expectedAddress = buildAddressApiInputForTests();
+        final var expectedContact = buildContactApiInputForTests();
         final var expectedCompanyName = "Company Name";
         final var expectedCompanyBranch = "Company Branch";
         final var expectedCompanySector = "Company Sector";
@@ -69,11 +82,19 @@ class ClientAPITest {
         verify(this.createClientUseCase, times(1)).execute(argThat(input -> Objects.equals(expectedCnpj, input.cnpj())));
     }
 
+    private static CreateContactApiInput buildContactApiInputForTests() {
+        return new CreateContactApiInput("email@email.com", "12334567896");
+    }
+
+    private static CreateAddressApiInput buildAddressApiInputForTests() {
+        return new CreateAddressApiInput("Rua", "333", "Bairro", "Cidade", "RS", "82456789");
+    }
+
     @Test
     void givenAnInvalidCnpjWhenCallsTheCreatedClientUseCaseMethodThenShouldReturnAnErrorMessage() throws Exception {
         final var expectedCnpj = "34494244000190";
-        final var expectedAddress = new CreateAddressApiInput("Rua", "333", "Bairro", "Cidade", "RS", "82456789");
-        final var expectedContact = new CreateContactApiInput("email@email.com", "12334567896");
+        final var expectedAddress = buildAddressApiInputForTests();
+        final var expectedContact = buildContactApiInputForTests();
         final var expectedCompanyName = "Company Name";
         final var expectedCompanyBranch = "Company Branch";
         final var expectedCompanySector = "Company Sector";
@@ -101,8 +122,8 @@ class ClientAPITest {
     @Test
     void givenAnInvalidCnpjWhenCallsTheCreatedClientUseCaseMethodThenShouldReturnADomainException() throws Exception {
         final var expectedCnpj = "34494244000190";
-        final var expectedAddress = new CreateAddressApiInput("Rua", "333", "Bairro", "Cidade", "RS", "82456789");
-        final var expectedContact = new CreateContactApiInput("email@email.com", "12334567896");
+        final var expectedAddress = buildAddressApiInputForTests();
+        final var expectedContact = buildContactApiInputForTests();
         final var expectedCompanyName = "Company Name";
         final var expectedCompanyBranch = "Company Branch";
         final var expectedCompanySector = "Company Sector";
@@ -125,6 +146,46 @@ class ClientAPITest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.errors[0].message").value(expectedErrorMessage));
 
         verify(this.createClientUseCase, times(1)).execute(argThat(input -> Objects.equals(expectedCnpj, input.cnpj())));
+    }
+
+    @Test
+    void shouldBeRetrievedFromGatewayAValidClientWhenReceiveAValidClientId() throws Exception {
+        final var expectedCnpj = "34494244000190";
+        final var expectedAddress = new Address("Rua", "333", "Bairro", "Cidade", "RS", "82456789");
+        final var expectedContact = new Contact("email@email.com", "12334567896");
+        final var expectedCompanyName = "Company Name";
+        final var expectedCompanyBranch = "Company Branch";
+        final var expectedCompanySector = "Company Sector";
+
+        final var client = Client.newClient(expectedCnpj, expectedAddress, expectedContact, expectedCompanyName, expectedCompanyBranch, expectedCompanySector);
+        final var expectedId = client.getId().getValue();
+
+        when(this.getClientByIdUseCase.execute(any())).thenReturn(ClientOutput.from(client));
+        final var request = get("/clients/{id}", expectedId);
+
+        final var response = this.mvc.perform(request).andDo(MockMvcResultHandlers.print());
+
+        response.andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.header().string("Content-Type", MediaType.APPLICATION_JSON_VALUE))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.id").value(expectedId));
+
+
+    }
+
+    @Test
+    void shouldNotBeRetrievedFromGatewayAValidClientWhenReceiveAnInvalidClientId() throws Exception {
+        final var expectedId = ClientID.from("123456789");
+        final var expectedErrorMessage = NotFoundException.ENTITY_NOT_FOUND_MESSAGE.formatted(Client.class.getSimpleName(), expectedId.getValue());
+
+        when(this.getClientByIdUseCase.execute(any())).thenThrow(NotFoundException.with(Client.class, expectedId));
+        final var request = get("/clients/{id}", expectedId);
+
+        final var response = this.mvc.perform(request).andDo(MockMvcResultHandlers.print());
+
+        response.andExpect(MockMvcResultMatchers.status().isNotFound())
+                .andExpect(MockMvcResultMatchers.header().string("Location", Matchers.nullValue()))
+                .andExpect(MockMvcResultMatchers.header().string("Content-Type", MediaType.APPLICATION_JSON_VALUE))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.message").value(expectedErrorMessage));
     }
 
 }
