@@ -86,7 +86,7 @@ escalabilidade, manutenção e adaptação do sistema às novas necessidades.
 
 ## <img align="center" src="https://raw.githubusercontent.com/devicons/devicon/6910f0503efdd315c8f9b858234310c06e04d9c0/icons/swagger/swagger-original.svg" alt="Swagger" width="40" height="30"> Swagger - ExactPro CMMS
 
-[<img align="center" src="https://img.shields.io/badge/Swagger-85EA2D?style=plastic&logo=swagger&logoColor=black" alt="Swagger" width="80" height="20">](http://localhost:8080/swagger-ui/index.html)
+[<img align="center" src="https://img.shields.io/badge/Swagger-85EA2D?style=plastic&logo=swagger&logoColor=black" alt="Swagger" width="80" height="20">](http://localhost:8080/api/swagger-ui/index.html)
 
 ---
 

@@ -8,6 +8,8 @@ server:
     threads:
       worker: 64
       io: 4
+  servlet:
+    context-path: /api
 
 spring:
   datasource:

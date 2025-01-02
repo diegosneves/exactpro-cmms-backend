@@ -32,6 +32,7 @@
             **/utils/**,
             **/persistence/**,
             **/configuration/**,
+            **/api/**,
             **org/diegosneves/infrastructure/configuration/web/CorsConfig.java,
             **org/diegosneves/infrastructure/configuration/web/WebSecurityConfig.java,
             **/org/diegosneves/infrastructure/ExactproCmmsBackendApplication.java
