@@ -8,6 +8,8 @@ server:
     threads:
       worker: 64
       io: 4
+  servlet:
+    context-path: /api
 
 spring:
   datasource:
@@ -40,6 +42,8 @@ spring:
 
 
 springdoc:
+  api-docs:
+    path: /v3/api-docs
   swagger-ui:
     path: /swagger-ui.html
 

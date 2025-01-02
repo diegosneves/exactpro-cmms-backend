@@ -5,6 +5,7 @@ import org.diegosneves.domain.client.ClientID;
 import org.diegosneves.domain.client.ClientSearchQuery;
 import org.diegosneves.domain.client.valueobject.Address;
 import org.diegosneves.domain.client.valueobject.Contact;
+import org.diegosneves.domain.exceptions.DomainException;
 import org.diegosneves.infrastructure.MySQLGatewayTest;
 import org.diegosneves.infrastructure.address.AddressMySQLGateway;
 import org.diegosneves.infrastructure.client.persistence.ClientJpaEntity;
@@ -18,6 +19,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @MySQLGatewayTest
 class ClientMySQLGatewayTest {
@@ -785,6 +787,33 @@ class ClientMySQLGatewayTest {
         assertEquals(expectedTotal, actualResult.total());
         assertEquals(expectedPerPage, actualResult.items().size());
         assertEquals(aClientThree.getId(), actualResult.items().get(0).getId());
+    }
+
+    @Test
+    void givenACnpjThatAlreadyExistsWhenCallsTheSaveShouldThrowException() {
+        final var expectedCnpj = "24888114000188";
+        final var expectedAddress = new Address("Rua", "333", "Bairro", "Cidade", "Estado", "93000000");
+        final var expectedContact = new Contact("email@gmail.com", "5645");
+        final var expectedCompanyName = "Company Name";
+        final var expectedCompanyBranch = "Esteio/RS";
+        final var expectedCompanySector = "Caldeiraria / Funelaria";
+        final var expectedErroMessage = String.format("O CNPJ %s já foi cadastrado!", expectedCnpj);
+
+        final var aClient = Client.newClient(expectedCnpj, expectedAddress, expectedContact, expectedCompanyName, expectedCompanyBranch, expectedCompanySector);
+
+        assertEquals(0, this.repository.count());
+
+        this.gateway.create(aClient);
+
+        assertEquals(1, this.repository.count());
+
+        final var actualException = assertThrows(DomainException.class, () -> this.gateway.create(aClient));
+
+        assertNotNull(actualException);
+        assertEquals(DomainException.class, actualException.getClass());
+        assertEquals(1, actualException.getErrors().size());
+        assertEquals(expectedErroMessage, actualException.getErrors().get(0).message());
+
     }
 
 }

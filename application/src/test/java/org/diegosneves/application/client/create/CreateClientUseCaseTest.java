@@ -1,7 +1,5 @@
 package org.diegosneves.application.client.create;
 
-import org.diegosneves.application.client.create.CreateClientCommand;
-import org.diegosneves.application.client.create.DefaultCreateClientUseCase;
 import org.diegosneves.domain.client.Client;
 import org.diegosneves.domain.client.ClientGateway;
 import org.diegosneves.domain.client.valueobject.Address;

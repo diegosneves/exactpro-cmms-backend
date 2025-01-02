@@ -3,11 +3,9 @@ package org.diegosneves.infrastructure.configuration.swagger;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Contact;
 import io.swagger.v3.oas.models.info.Info;
-import io.swagger.v3.oas.models.tags.Tag;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
-import java.util.List;
+import org.springframework.context.annotation.Profile;
 
 /**
  * Classe de configuração para a documentação da API aberta ({@link OpenAPI}).
@@ -21,6 +19,7 @@ import java.util.List;
  * @since 1.0.0
  */
 @Configuration
+@Profile("development")
 public class OpenApiConfig {
 
     /**
@@ -33,8 +32,7 @@ public class OpenApiConfig {
     @Bean
     public OpenAPI customOpenAPI() {
         return new OpenAPI()
-                .info(getInfo())
-                .tags(getTags());
+                .info(getInfo());
     }
 
 
@@ -49,19 +47,6 @@ public class OpenApiConfig {
                 .title("ExactPro CMMS Backend API")
                 .description("CMMS API")
                 .contact(new Contact().email("neves.diegoalex@outlook.com").url("https://github.com/diegosneves/exactpro-cmms-backend").name("Diego Neves"));
-    }
-
-    /**
-     * Recupera a lista de Etiquetas ({@link Tag Tags}).
-     *
-     * @return Uma lista de Etiquetas ({@link Tag Tags}), cada uma contendo um nome e uma descrição que detalham a
-     * finalidade da respectiva Etiqueta.
-     */
-    private List<Tag> getTags() {
-        return List.of(
-                new Tag().name("Endereços").description("Funcionalidades direcionadas para os Endereços"),
-                new Tag().name("Usuários").description("Funcionalidades direcionadas para os Usuários"),
-                new Tag().name("Abrigos").description("Funcionalidades direcionadas para os Abrigos"));
     }
 
 }
