@@ -86,7 +86,7 @@ escalabilidade, manutenção e adaptação do sistema às novas necessidades.
 
 ## <img align="center" src="https://raw.githubusercontent.com/devicons/devicon/6910f0503efdd315c8f9b858234310c06e04d9c0/icons/swagger/swagger-original.svg" alt="Swagger" width="40" height="30"> Swagger - ExactPro CMMS
 
-[<img align="center" src="https://img.shields.io/badge/Swagger-85EA2D?style=plastic&logo=swagger&logoColor=black" alt="Swagger" width="80" height="20">](http://localhost:8080/swagger-ui/index.html)
+[<img align="center" src="https://img.shields.io/badge/Swagger-85EA2D?style=plastic&logo=swagger&logoColor=black" alt="Swagger" width="80" height="20">](http://localhost:8080/api/swagger-ui/index.html)
 
 ---
 
@@ -115,7 +115,7 @@ services:
       - db-mysql-exactpro:/var/lib/mysql
 
   exactpro-app:
-    image: diegoneves/exactpro:latest
+    image: diegoneves/exactpro-cmms-backend:latest
     container_name: exactpro-api
     ports:
       - "8080:8080"
@@ -128,7 +128,7 @@ services:
       - DB_NAME=${DB_NAME}
       - DB_USERNAME=${DB_USERNAME}
       - DB_PASSWORD=${DB_PASSWORD}
-    entrypoint: sh -c "dockerize -wait tcp://$${DB_HOST}:$${DB_PORT} -timeout 20s && java -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005 -jar target/exactpro-cmms-backend.jar"
+    entrypoint: sh -c "dockerize -wait tcp://$${DB_HOST}:$${DB_PORT} -timeout 20s && java -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005 -jar infrastructure/target/exactpro-cmms.jar"
 
 volumes:
   db-mysql-exactpro:
